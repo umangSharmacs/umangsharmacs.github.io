@@ -1,0 +1,18 @@
+# Basic site config
+title: "Umang Sharma"
+description: "Portfolio"
+url: "https://umangsharmacs.github.io"
+baseurl: ""
+
+# Use GitHub Pages supported theme
+theme: minima
+
+# Optional, but recommended
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Show Projects in the top nav
+header_pages:
+  - projects.md
+
