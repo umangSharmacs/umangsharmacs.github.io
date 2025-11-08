@@ -16,3 +16,17 @@ plugins:
 header_pages:
   - projects.md
 
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Collection defaults
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+

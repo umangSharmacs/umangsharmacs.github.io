@@ -1,0 +1,216 @@
+---
+layout: default
+---
+
+<style>
+    .project-header {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px 20px;
+    }
+
+    .project-header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+    .project-meta {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .project-date {
+        color: #666;
+        font-style: italic;
+    }
+
+    .project-technologies {
+        color: #666;
+        font-style: italic;
+    }
+
+    .project-links {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .project-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background-color: #2c3e50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+    }
+
+    .project-links a:hover {
+        background-color: #1a252f;
+    }
+
+    .project-links img {
+        height: 1.2em;
+        width: auto;
+        filter: brightness(0) invert(1);
+    }
+
+    .project-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+    }
+
+    .project-content h2 {
+        color: #2c3e50;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+    }
+
+    .project-content h3 {
+        color: #34495e;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .project-content p {
+        line-height: 1.8;
+        color: #444;
+        margin-bottom: 15px;
+    }
+
+        .project-content ul {
+            list-style-type: disc;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .project-content ol {
+            list-style-type: decimal;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .project-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .project-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        /* Code styling */
+        .project-content code {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        .project-content pre {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #333;
+        }
+
+        .project-content pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+    .back-link {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+
+    .back-link a {
+        color: #2c3e50;
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="back-link">
+    <a href="/">← Back to Home</a>
+</div>
+
+<div class="project-header">
+    <h1>{{ page.title }}</h1>
+    
+    <div class="project-meta">
+        {% if page.date %}
+        <div class="project-date">{{ page.date }}</div>
+        {% endif %}
+        
+        {% if page.technologies %}
+        <div class="project-technologies"><strong>Technologies:</strong> {{ page.technologies }}</div>
+        {% endif %}
+    </div>
+
+    {% if page.github_link or page.paper_link or page.kaggle_link or page.external_link %}
+    <div class="project-links">
+        {% if page.github_link %}
+        <a href="{{ page.github_link }}" target="_blank">
+            <img src="/icons/github.png" alt="GitHub">
+            GitHub Repository
+        </a>
+        {% endif %}
+        
+        {% if page.paper_link %}
+        <a href="{{ page.paper_link }}" target="_blank">
+            <img src="/icons/pdf.png" alt="PDF">
+            Paper/Report
+        </a>
+        {% endif %}
+        
+        {% if page.kaggle_link %}
+        <a href="{{ page.kaggle_link }}" target="_blank">
+            <img src="/icons/kaggle-logo-transparent.svg" alt="Kaggle">
+            Kaggle Notebook
+        </a>
+        {% endif %}
+
+        {% if page.external_link %}
+        <a href="{{ page.external_link }}" target="_blank">
+            External Link
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+<div class="project-content">
+    {{ content }}
+</div>
+
+<div class="back-link">
+    <a href="/">← Back to Home</a>
+</div>
+

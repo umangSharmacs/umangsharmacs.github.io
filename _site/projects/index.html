@@ -1,84 +1,966 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Projects | Umang Sharma</title>
-<meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="Projects" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Portfolio" />
-<meta property="og:description" content="Portfolio" />
-<link rel="canonical" href="http://0.0.0.0:4000/projects/" />
-<meta property="og:url" content="http://0.0.0.0:4000/projects/" />
-<meta property="og:site_name" content="Umang Sharma" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Projects" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Portfolio","headline":"Projects","url":"http://0.0.0.0:4000/projects/"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="Umang Sharma" /></head>
-<body><header class="site-header" role="banner">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Umang Sharma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Umang Sharma</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+        html {
+            scroll-behavior: smooth;
+        }
 
-        <div class="trigger"><a class="page-link" href="/projects/">Projects</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8f9fa;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-  <header class="post-header">
-    <h1 class="post-title">Projects</h1>
-  </header>
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a1a;
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
 
-  <div class="post-content">
-    <p>Here are selected projects:</p>
+        nav .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-<ul>
-  <li><a href="/projects/computer-vision-project/">Computer Vision Project</a></li>
-</ul>
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, opacity 0.3s;
+            opacity: 0.9;
+        }
+
+        nav .nav-links a:hover {
+            opacity: 1;
+            color: #ffffff;
+        }
+
+        /* Hero Section - Combined */
+        .hero-combined {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 80px;
+            z-index: 1;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin: 0 auto;
+        }
+
+        .hero-image-section {
+            flex-shrink: 0;
+        }
+
+        .hero-profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 5px solid #ffffff;
+        }
+
+        .hero-text-section {
+            flex: 1;
+        }
+
+        .hero-text-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2d2d2d;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+        }
+
+        .btn-secondary:hover {
+            background: #f7fafc;
+            transform: translateY(-2px);
+        }
 
 
-  </div>
 
-</article>
+        /* Projects Section */
+        .projects {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 5%;
+            position: relative;
+            z-index: 1;
+        }
 
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
+        .projects h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
 
-  <div class="wrapper">
+        .section-subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
 
-    <h2 class="footer-heading">Umang Sharma</h2>
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Umang Sharma</li></ul>
-      </div>
+        .carousel-wrapper {
+            overflow: hidden;
+            flex: 1;
+        }
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 30px;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 25px;
+            background: transparent;
+        }
+
+        .carousel-slide a.card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* Project Card Styles */
+        .project-card {
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .project-subtitle {
+            margin: 0;
+            color: #718096;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        /* Carousel Arrows */
+        .carousel-arrow {
+            background: white;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .carousel-arrow:hover {
+            background: #1a1a1a;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .carousel-arrow:active {
+            transform: scale(0.95);
+        }
+
+        .carousel-arrow:disabled {
+            background: #e2e8f0;
+            color: #cbd5e0;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .carousel-arrow:disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: #cbd5e0;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .carousel-dot:hover {
+            background: #a0aec0;
+            transform: scale(1.3);
+        }
+
+        .carousel-dot.active {
+            background: #1a1a1a;
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* Experience Section */
+        .experience {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .experience-item a.card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .heading-with-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .heading-with-icons h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .icon {
+            height: 24px;
+            width: auto;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .icon:hover {
+            opacity: 1;
+        }
+
+        .date {
+            color: #718096;
+            font-style: italic;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .skills {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .experience-item ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .experience-item li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #4a5568;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                gap: 40px;
+            }
+
+            .hero-profile-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-text-section h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-combined {
+                min-height: auto;
+                padding: 100px 5% 60px;
+            }
+
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-text-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .projects h2,
+            .experience h2 {
+                font-size: 2rem;
+            }
+
+            .carousel-container {
+                gap: 12px;
+            }
+
+            .carousel-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+
+            .carousel-slide {
+                min-width: 100%;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                gap: 20px;
+            }
+
+            .project-card {
+                padding: 18px 15px;
+                min-height: 80px;
+            }
+
+            .project-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .project-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .experience-item {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            nav .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .carousel-slide {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">US</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/#experience">Experience</a></li>
+                <li><a href="mailto:umangsharma.cs@gmail.com">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <style>
+    body {
+        background: #f8f9fa !important;
+    }
+
+    .projects-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 120px 20px 80px;
+    }
+
+    .projects-page h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .page-subtitle {
+        text-align: center;
+        color: #718096;
+        font-size: 1.2rem;
+        margin-bottom: 4rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .projects-list {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .project-card-wrapper {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 40px;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .project-card-wrapper:hover {
+        transform: translateY(-5px);
+        border-color: #cbd5e0;
+    }
+
+    .project-card-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+
+    .project-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+        flex: 1;
+        padding-right: 20px;
+    }
+
+    .project-icons {
+        display: flex;
+        gap: 12px;
+        flex-shrink: 0;
+    }
+
+    .project-icon-link {
+        opacity: 0.6;
+        transition: opacity 0.3s;
+    }
+
+    .project-icon-link:hover {
+        opacity: 1;
+    }
+
+    .project-icon-link img {
+        width: 24px;
+        height: 24px;
+        display: block;
+    }
+
+    .project-date {
+        color: #718096;
+        font-size: 0.95rem;
+        font-style: italic;
+        margin: 0 0 20px 0;
+    }
+
+    .project-description {
+        color: #4a5568;
+        line-height: 1.7;
+        margin: 0 0 20px 0;
+        font-size: 1rem;
+    }
+
+    .project-tech {
+        color: #718096;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 15px;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .projects-page {
+            padding: 100px 20px 60px;
+        }
+
+        .projects-page h1 {
+            font-size: 2.2rem;
+        }
+
+        .project-card-wrapper {
+            padding: 30px 25px;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+        }
+
+        .project-header {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .project-icons {
+            align-self: flex-end;
+        }
+    }
+</style>
+
+<div class="projects-page">
+    <h1>All Projects</h1>
+    <p class="page-subtitle">A comprehensive collection of my work in AI, Machine Learning, and Data Science</p>
+
+    <div class="projects-list">
+        <div class="project-card-wrapper">
+            <a href="/projects/Email_CRM_System/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Email CRM System</h3>
+                </div>
+                <p class="project-date">August 2025 - December 2025</p>
+                <p class="project-description">Scalable B2B email outreach management platform with automated follow-up sequences and reply tracking. Reduced manual outreach management time by 90% with intelligent 4-stage email automation and response monitoring.</p>
+                <p class="project-tech">React • PHP • n8n • RAG</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/chord/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">CHORD - Collaborative Healthcare Operations Research Dashboard</h3>
+                    <div class="project-icons">
+                        <a href="https://github.com/umangSharmacs/chord" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/github.png" alt="GitHub" />
+                        </a>
+                    </div>
+                </div>
+                <p class="project-date">September 2024 - December 2024</p>
+                <p class="project-description">Comprehensive analytics platform designed to optimize healthcare operations through data-driven insights and predictive modeling. Features real-time operational metrics, predictive analytics for patient flow, and resource allocation algorithms.</p>
+                <p class="project-tech">Python • Flask • PostgreSQL • D3.js • React</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/autonomous-zooming-cameraman/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Autonomous Zooming Cameraman</h3>
+                    <div class="project-icons">
+                        <a href="https://github.com/VedantZope/CIS-5810---Auto-Zooming-Cameraman" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/github.png" alt="GitHub" />
+                        </a>
+                        <a href="/data/Computer_Vision_Project_Final_Report_Group_30.pdf" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/pdf.png" alt="PDF" />
+                        </a>
+                    </div>
+                </div>
+                <p class="project-date">August 2024 - December 2024</p>
+                <p class="project-description">Developed YOLOv11 model for basketball detection with CSRT tracking for continuous 30-frame ball tracking. Created post-game analysis system with heatmap visualization and automated commentary using GPT-Vision API.</p>
+                <p class="project-tech">YOLOv11 • CSRT • Computer Vision • OpenAI GPT-Vision API</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/irrigation-water-quality/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Irrigation Water Quality Classifier</h3>
+                    <div class="project-icons">
+                        <a href="https://github.com/umangSharmacs/capstone" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/github.png" alt="GitHub" />
+                        </a>
+                    </div>
+                </div>
+                <p class="project-date">January 2021 - January 2022</p>
+                <p class="project-description">Led development of novel dataset and Random Forest classifier achieving 83% accuracy. Enhanced model using randomized value correlation techniques and reinforced learning.</p>
+                <p class="project-tech">Random Forest • Python • Machine Learning</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/needlespotter-intern/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">AI and Data Systems Intern - NeedleSpotter Inc</h3>
+                    <div class="project-icons">
+                        <a href="https://github.com/umangSharmacs/contentgen" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/github.png" alt="GitHub" />
+                        </a>
+                    </div>
+                </div>
+                <p class="project-date">June 2025 - August 2025</p>
+                <p class="project-description">Built an interactive dashboard for editing AI-generated medical tweets. Developed RLHF pipelines, LLM fine-tuning loops, and GPT-based article rewriting tools tailored for clinical audiences.</p>
+                <p class="project-tech">Javascript • PHP • Python • AI</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/upenn-research/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Research Assistant - University of Pennsylvania</h3>
+                    <div class="project-icons">
+                        <a href="https://www.kaggle.com/code/umangsharmacs/roberta-predictions-analysis" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/kaggle-logo-transparent.svg" alt="Kaggle" />
+                        </a>
+                    </div>
+                </div>
+                <p class="project-date">August 2024 - Present</p>
+                <p class="project-description">Email classification using RoBERTa, achieving 81% F1 score, and developed multi-class classification pipeline using T5. Automated classification for 200,000+ emails, enabling behavioral pattern analysis.</p>
+                <p class="project-tech">RoBERTa • T5 • Python • NLP • Machine Learning</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/zs-associate/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Decision Analytics Associate - ZS Associates</h3>
+                </div>
+                <p class="project-date">July 2022 - April 2024</p>
+                <p class="project-description">Led market analysis using Random Forest Classifiers, optimizing budgets by 15% and increasing sales by 20%. Developed Deep learning applications using TFT, DeepAR and LSTMs with 80% prediction accuracy.</p>
+                <p class="project-tech">Python • Deep Learning • TFT • DeepAR • LSTM • Tableau • Random Forest</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/zs-intern/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Decision Analytics Associate Intern - ZS Associates</h3>
+                </div>
+                <p class="project-date">January 2022 - June 2022</p>
+                <p class="project-description">Implemented Bayesian Regression for market trend analysis, improving budget efficiency by 27%. Designed ETL pipelines reducing processing time by 30% and developed visualization dashboards.</p>
+                <p class="project-tech">Python • SQL • Tableau • Plotly • Bayesian Regression • ETL</p>
+            </a>
+        </div>
+
+        <div class="project-card-wrapper">
+            <a href="/projects/meeting-minutes-research/" class="project-card-link">
+                <div class="project-header">
+                    <h3 class="project-title">Meeting Minutes Generation Research</h3>
+                    <div class="project-icons">
+                        <a href="https://github.com/umangSharmacs/theTuringTestament" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/github.png" alt="GitHub" />
+                        </a>
+                        <a href="https://www.isca-archive.org/automin_2021/sharma21_automin.html" class="project-icon-link" onclick="event.stopPropagation();" target="_blank">
+                            <img src="/icons/pdf.png" alt="PDF" />
+                        </a>
+                    </div>
+                </div>
+                <p class="project-date">September 2021</p>
+                <p class="project-description">Developed MCDA pipeline analyzing 2M+ data points for meeting minutes generation. Achieved 128% better performance than BERT and T5 models using TOPSIS ranking.</p>
+                <p class="project-tech">TOPSIS • MCDA • BERT • T5 • NLP</p>
+            </a>
+        </div>
+    </div>
 </div>
 
-      <div class="footer-col footer-col-3">
-        <p>Portfolio</p>
-      </div>
-    </div>
 
-  </div>
+    <script>
+        // Carousel functionality for 2x2 grid
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.carousel-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.querySelector('.carousel-arrow-left');
+            const nextButton = document.querySelector('.carousel-arrow-right');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            if (!track || slides.length === 0) return;
 
-</footer>
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const slideWidth = slides[0].offsetWidth;
+                const gap = 30;
+                const offset = currentIndex * (slideWidth + gap);
+                track.style.transform = `translateX(-${offset}px)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+
+                // Update arrow states
+                if (prevButton && nextButton) {
+                    prevButton.disabled = currentIndex === 0;
+                    nextButton.disabled = currentIndex >= slides.length - 1;
+                }
+            }
+
+            function goToSlide(index) {
+                currentIndex = Math.max(0, Math.min(index, slides.length - 1));
+                updateCarousel();
+            }
+
+            function nextSlide() {
+                if (currentIndex < slides.length - 1) {
+                    goToSlide(currentIndex + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                }
+            }
+
+            // Event listeners
+            if (prevButton) prevButton.addEventListener('click', prevSlide);
+            if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    updateCarousel();
+                }, 250);
+            });
+
+            // Initialize
+            updateCarousel();
+        });
+    </script>
 </body>
-
 </html>
