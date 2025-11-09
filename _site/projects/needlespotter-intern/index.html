@@ -163,8 +163,8 @@
 
         .btn-primary:hover {
             background: #2d2d2d;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
         }
 
         .btn-secondary {
@@ -175,10 +175,84 @@
 
         .btn-secondary:hover {
             background: #f7fafc;
-            transform: translateY(-2px);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
 
+        /* Expandable Contact Button */
+        .contact-expandable {
+            position: relative;
+            display: inline-block;
+        }
 
+        .btn-contact-main {
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-expandable:hover .btn-contact-main {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .contact-icons {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out 0.1s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .contact-expandable:hover .contact-icons {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .contact-icon img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #1a1a1a;
+            transition: fill 0.3s;
+        }
+
+        .contact-icon:hover {
+            background: #1a1a1a;
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .contact-icon:hover svg {
+            fill: white;
+        }
+
+        .contact-icon:hover img {
+            filter: invert(1) brightness(2);
+        }
 
         /* Projects Section */
         .projects {
@@ -187,6 +261,7 @@
             padding: 60px 5%;
             position: relative;
             z-index: 1;
+            background: #f8f9fa;
         }
 
         .projects h2 {
@@ -212,27 +287,35 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            background: #f8f9fa;
+            padding: 15px 0;
         }
 
         .carousel-wrapper {
-            overflow: hidden;
             flex: 1;
+            background: #f8f9fa;
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             gap: 30px;
+            background: #f8f9fa;
         }
 
         .carousel-slide {
-            min-width: 100%;
-            flex-shrink: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            width: 100%;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            grid-auto-rows: 1fr;
             gap: 25px;
-            background: transparent;
+            background: #f8f9fa;
+            align-items: stretch;
+        }
+        
+        .carousel-slide > * {
+            min-width: 0;
+            height: 100%;
         }
 
         .carousel-slide a.card-link {
@@ -243,13 +326,13 @@
 
         /* Project Card Styles */
         .project-card {
-            padding: 30px 20px;
+            padding: 35px 25px;
             border-radius: 12px;
             background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 2px solid #e2e8f0;
             transition: all 0.3s;
             text-align: center;
-            min-height: 150px;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -257,13 +340,13 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-15px);
+            border-color: #cbd5e0;
         }
 
         .project-card h3 {
             margin: 0 0 0.5rem 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #1a1a1a;
             font-weight: 700;
         }
@@ -271,7 +354,7 @@
         .project-subtitle {
             margin: 0;
             color: #718096;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             line-height: 1.4;
         }
 
@@ -296,7 +379,7 @@
         .carousel-arrow:hover {
             background: #1a1a1a;
             color: white;
-            transform: scale(1.1);
+            transform: translateY(-10px) scale(1.1);
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
@@ -377,7 +460,7 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
 
-        .experience-item a.card-link {
+        .experience a.card-link {
             text-decoration: none;
             color: inherit;
             display: block;
@@ -513,8 +596,7 @@
 
             .carousel-slide {
                 min-width: 100%;
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: auto;
+                grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
             }
 
@@ -571,6 +653,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/projects/">Projects</a></li>
                 <li><a href="/#experience">Experience</a></li>
+                <li><a href="/data/Umang_CV_Final.pdf" target="_blank">Resume</a></li>
                 <li><a href="mailto:umangsharma.cs@gmail.com">Contact</a></li>
             </ul>
         </div>
@@ -744,7 +827,7 @@
         
         
         
-        <div class="project-technologies"><strong>Technologies:</strong> Javascript, PHP, Python, AI</div>
+        <div class="project-technologies"><strong>Technologies:</strong> React, PHP, Python, LLMs, RAG, RLHF</div>
         
     </div>
 
@@ -769,26 +852,37 @@
 <div class="project-content">
     <h2 id="overview">Overview</h2>
 
-<p>During my internship at NeedleSpotter Inc, I worked on developing AI-powered tools for medical content generation and editing.</p>
+<p>During my internship at NeedleSpotter Inc, I developed AI-powered systems for medical content generation, editing, and quality improvement through iterative model training and human feedback integration.</p>
 
 <h2 id="key-contributions">Key Contributions</h2>
 
-<ul>
-  <li>Built an interactive dashboard for editing AI-generated medical tweets</li>
-  <li>Developed RLHF pipelines, LLM fine-tuning loops, and GPT-based article rewriting tools tailored for clinical audiences</li>
-</ul>
+<h3 id="end-to-end-dashboard-development">End-to-End Dashboard Development</h3>
+<p>Built an end-to-end dashboard to fetch, display, and edit AI-generated tweets from medical literature with real-time modification capabilities.</p>
+
+<h3 id="multi-stage-filtering-system">Multi-Stage Filtering System</h3>
+<p>Engineered a multi-stage filtering system leveraging scoring rubrics (clinical relevance, impact, journal quality) to pre-select PubMed articles for downstream LLM generation.</p>
+
+<h3 id="feedback-collection--rlhf-pipeline">Feedback Collection &amp; RLHF Pipeline</h3>
+<p>Engineered a feedback collection system within the dashboard interface, capturing human edits and preferences for reinforcement learning from human feedback (RLHF) model improvement.</p>
+
+<h3 id="email-crm-system">Email CRM System</h3>
+<p>Built an AI-powered Email CRM system to automate outreach workflows, manage client engagement data, and personalize communication using NLP-based classification and analytics.
+Integrated automation pipelines to track engagement metrics in real time and optimize response strategies across thousands of emails.</p>
+
+<h3 id="logs-system">Logs system</h3>
+<p>Developed a centralized n8n logging framework to monitor workflow executions, errors, and performance metrics across automated pipelines.</p>
 
 <h2 id="technical-details">Technical Details</h2>
 
-<p><em>Content to be added - describe the technical implementation, challenges, and solutions</em></p>
+<p><strong>Technologies Used:</strong> React, PHP, Python, LLMs, RAG, RLHF</p>
 
 <h2 id="results-and-impact">Results and Impact</h2>
 
-<p><em>Content to be added - describe the outcomes and impact of your work</em></p>
-
-<h2 id="lessons-learned">Lessons Learned</h2>
-
-<p><em>Content to be added - reflect on what you learned during this internship</em></p>
+<ul>
+  <li>Developed a complete feedback loop system that enables continuous model improvement through human editorial input</li>
+  <li>Created a flexible, persona-based content generation system that adapts tone and complexity for different medical audiences</li>
+  <li>Established a scalable pipeline for processing medical literature and generating high-quality, clinically relevant content</li>
+</ul>
 
 
 </div>

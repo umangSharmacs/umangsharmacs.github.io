@@ -1,8 +1,8 @@
 ---
-layout: project
+layout: experience
 title: AI and Data Systems Intern - NeedleSpotter Inc
-permalink: /projects/needlespotter-intern/
-date: June 2025 - Present
+start_date: 2025-06-01
+end_date: Present
 technologies: React, PHP, Python, LLMs, RAG, RLHF
 github_link: https://github.com/umangSharmacs/contentgen
 ---
@@ -23,10 +23,9 @@ Engineered a multi-stage filtering system leveraging scoring rubrics (clinical r
 Engineered a feedback collection system within the dashboard interface, capturing human edits and preferences for reinforcement learning from human feedback (RLHF) model improvement.
 
 ### Email CRM System
-Built an AI-powered Email CRM system to automate outreach workflows, manage client engagement data, and personalize communication using NLP-based classification and analytics.
-Integrated automation pipelines to track engagement metrics in real time and optimize response strategies across thousands of emails.
+Built an AI-powered Email CRM system to automate outreach workflows, manage client engagement data, and personalize communication using NLP-based classification and analytics. Integrated automation pipelines to track engagement metrics in real time and optimize response strategies across thousands of emails.
 
-### Logs system
+### Logs System
 Developed a centralized n8n logging framework to monitor workflow executions, errors, and performance metrics across automated pipelines.
 
 ## Technical Details

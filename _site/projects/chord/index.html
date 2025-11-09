@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHORD - Collaborative Healthcare Operations Research Dashboard - Umang Sharma</title>
+    <title>Distributed Network Simulation & P2P Search System - Umang Sharma</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -163,8 +163,8 @@
 
         .btn-primary:hover {
             background: #2d2d2d;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
         }
 
         .btn-secondary {
@@ -175,10 +175,84 @@
 
         .btn-secondary:hover {
             background: #f7fafc;
-            transform: translateY(-2px);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
 
+        /* Expandable Contact Button */
+        .contact-expandable {
+            position: relative;
+            display: inline-block;
+        }
 
+        .btn-contact-main {
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-expandable:hover .btn-contact-main {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .contact-icons {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out 0.1s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .contact-expandable:hover .contact-icons {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .contact-icon img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #1a1a1a;
+            transition: fill 0.3s;
+        }
+
+        .contact-icon:hover {
+            background: #1a1a1a;
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .contact-icon:hover svg {
+            fill: white;
+        }
+
+        .contact-icon:hover img {
+            filter: invert(1) brightness(2);
+        }
 
         /* Projects Section */
         .projects {
@@ -187,6 +261,7 @@
             padding: 60px 5%;
             position: relative;
             z-index: 1;
+            background: #f8f9fa;
         }
 
         .projects h2 {
@@ -212,27 +287,35 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            background: #f8f9fa;
+            padding: 15px 0;
         }
 
         .carousel-wrapper {
-            overflow: hidden;
             flex: 1;
+            background: #f8f9fa;
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             gap: 30px;
+            background: #f8f9fa;
         }
 
         .carousel-slide {
-            min-width: 100%;
-            flex-shrink: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            width: 100%;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            grid-auto-rows: 1fr;
             gap: 25px;
-            background: transparent;
+            background: #f8f9fa;
+            align-items: stretch;
+        }
+        
+        .carousel-slide > * {
+            min-width: 0;
+            height: 100%;
         }
 
         .carousel-slide a.card-link {
@@ -243,13 +326,13 @@
 
         /* Project Card Styles */
         .project-card {
-            padding: 30px 20px;
+            padding: 35px 25px;
             border-radius: 12px;
             background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 2px solid #e2e8f0;
             transition: all 0.3s;
             text-align: center;
-            min-height: 150px;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -257,13 +340,13 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-15px);
+            border-color: #cbd5e0;
         }
 
         .project-card h3 {
             margin: 0 0 0.5rem 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #1a1a1a;
             font-weight: 700;
         }
@@ -271,7 +354,7 @@
         .project-subtitle {
             margin: 0;
             color: #718096;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             line-height: 1.4;
         }
 
@@ -296,7 +379,7 @@
         .carousel-arrow:hover {
             background: #1a1a1a;
             color: white;
-            transform: scale(1.1);
+            transform: translateY(-10px) scale(1.1);
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
@@ -377,7 +460,7 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
 
-        .experience-item a.card-link {
+        .experience a.card-link {
             text-decoration: none;
             color: inherit;
             display: block;
@@ -513,8 +596,7 @@
 
             .carousel-slide {
                 min-width: 100%;
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: auto;
+                grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
             }
 
@@ -571,6 +653,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/projects/">Projects</a></li>
                 <li><a href="/#experience">Experience</a></li>
+                <li><a href="/data/Umang_CV_Final.pdf" target="_blank">Resume</a></li>
                 <li><a href="mailto:umangsharma.cs@gmail.com">Contact</a></li>
             </ul>
         </div>
@@ -736,71 +819,430 @@
 </div>
 
 <div class="project-header">
-    <h1>CHORD - Collaborative Healthcare Operations Research Dashboard</h1>
+    <h1>Distributed Network Simulation & P2P Search System</h1>
     
     <div class="project-meta">
         
-        <div class="project-date">2024-09-01 00:00:00 -0400</div>
+        <div class="project-date">2025-01-01 00:00:00 -0500</div>
         
         
         
-        <div class="project-technologies"><strong>Technologies:</strong> Python, Flask, PostgreSQL, D3.js, React</div>
+        <div class="project-technologies"><strong>Technologies:</strong> C++, NS-3 Network Simulator, Socket Programming, Distributed Systems, DHT (Chord Protocol)</div>
         
     </div>
 
-    
-    <div class="project-links">
-        
-        <a href="https://github.com/umangSharmacs/chord" target="_blank">
-            <img src="/icons/github.png" alt="GitHub">
-            GitHub Repository
-        </a>
-        
-        
-        
-        
-        
-
-        
-    </div>
     
 </div>
 
 <div class="project-content">
-    <h2 id="overview">Overview</h2>
+    <blockquote>
+  <p>A comprehensive network simulation framework implementing dynamic routing protocols and a scalable peer-to-peer search system built on distributed hash table architecture.</p>
+</blockquote>
 
-<p>CHORD (Collaborative Healthcare Operations Research Dashboard) is a comprehensive analytics platform designed to optimize healthcare operations through data-driven insights and predictive modeling.</p>
+<h2 id="project-overview">Project Overview</h2>
 
-<h2 id="key-features">Key Features</h2>
+<p>This project implements a complete network simulation environment featuring <strong>dynamic routing protocols</strong> and a <strong>distributed peer-to-peer search application</strong>. Built on the NS-3 network simulator, it demonstrates fundamental concepts in computer networking, distributed systems, and algorithm design through three major components:</p>
 
-<ul>
-  <li>Real-time operational metrics dashboard</li>
-  <li>Predictive analytics for patient flow optimization</li>
-  <li>Resource allocation algorithms</li>
-  <li>Interactive data visualizations</li>
-  <li>Multi-user collaboration features</li>
-</ul>
+<ol>
+  <li><strong>Distance Vector (DV) Routing Protocol</strong> - Decentralized routing using the Bellman-Ford algorithm</li>
+  <li><strong>Link State (LS) Routing Protocol</strong> - Global network view routing using Dijkstra’s algorithm</li>
+  <li><strong>Penn Search</strong> - Distributed P2P search system built on Chord DHT for scalable document indexing and retrieval</li>
+</ol>
 
-<h2 id="technical-implementation">Technical Implementation</h2>
-
-<p><em>Content to be added - describe the technical architecture and implementation</em></p>
-
-<h2 id="results-and-impact">Results and Impact</h2>
-
-<p><em>Content to be added - describe the outcomes and improvements achieved</em></p>
-
-<h2 id="technologies-used">Technologies Used</h2>
+<h3 id="key-achievements">Key Achievements</h3>
 
 <ul>
-  <li><strong>Backend</strong>: Python, Flask, PostgreSQL</li>
-  <li><strong>Frontend</strong>: React, D3.js</li>
-  <li><strong>Analytics</strong>: Pandas, NumPy, Scikit-learn</li>
-  <li><strong>Deployment</strong>: Docker, AWS</li>
+  <li>Successfully simulated networks with <strong>40+ nodes</strong> handling dynamic topology changes</li>
+  <li>Implemented fault-tolerant routing with automatic convergence on link failures</li>
+  <li>Built scalable P2P search supporting <strong>distributed inverted index</strong> across multiple nodes</li>
+  <li>Achieved <strong>O(log N)</strong> lookup complexity in the Chord DHT implementation</li>
 </ul>
 
-<h2 id="challenges-and-solutions">Challenges and Solutions</h2>
+<h3 id="technical-skills">Technical Skills</h3>
 
-<p><em>Content to be added - discuss technical challenges faced and solutions implemented</em></p>
+<ul>
+  <li><strong>Languages &amp; Tools:</strong> C++, NS-3 Network Simulator, Socket Programming, STL containers</li>
+  <li><strong>Networking:</strong> Distance Vector routing (Bellman-Ford), Link State routing (Dijkstra), DHT implementation, P2P systems</li>
+  <li><strong>Algorithms:</strong> Graph algorithms (shortest path), consistent hashing (SHA-1), distributed algorithms, inverted index search</li>
+  <li><strong>Systems:</strong> Event-driven architecture, asynchronous I/O, protocol design, fault-tolerant systems</li>
+</ul>
+
+<hr />
+
+<h2 id="component-1-distance-vector-routing-protocol">Component 1: Distance Vector Routing Protocol</h2>
+
+<h3 id="problem-statement">Problem Statement</h3>
+
+<p>In dynamic networks, routers need to efficiently compute paths to all destinations without global network knowledge, adapting to topology changes like link failures.</p>
+
+<h3 id="solution-bellman-ford-algorithm-implementation">Solution: Bellman-Ford Algorithm Implementation</h3>
+
+<p><strong>Key Features:</strong></p>
+
+<ul>
+  <li><strong>Distributed routing table computation</strong> - Each node maintains distance vectors to all destinations</li>
+  <li><strong>Periodic updates</strong> - Nodes exchange routing information with neighbors</li>
+  <li><strong>Poisoned reverse</strong> - Prevents routing loops by advertising infinite cost to the node that provided the route</li>
+  <li><strong>Split horizon</strong> - Avoids sending routing information back to the source</li>
+</ul>
+
+<h3 id="core-algorithm-pseudocode">Core Algorithm (Pseudocode)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Initialize routing table
+function InitializeRoutingTable():
+    for each neighbor in neighbors:
+        routingTable[neighbor] = directCost(neighbor)
+    routingTable[self] = 0
+
+// Periodic update to neighbors
+function SendRoutingUpdate():
+    for each neighbor in neighbors:
+        dvPacket = createDVPacket()
+        for each destination in routingTable:
+            if routingTable[destination].nextHop == neighbor:
+                // Split horizon with poisoned reverse
+                dvPacket.add(destination, INFINITY)
+            else:
+                dvPacket.add(destination, routingTable[destination].cost)
+        send(dvPacket, neighbor)
+
+// Process received routing update
+function ProcessRoutingUpdate(dvPacket, fromNeighbor):
+    updated = false
+    for each (destination, cost) in dvPacket:
+        newCost = cost + linkCost(fromNeighbor)
+        if destination not in routingTable OR newCost &lt; routingTable[destination].cost:
+            routingTable[destination] = {cost: newCost, nextHop: fromNeighbor}
+            updated = true
+        else if routingTable[destination].nextHop == fromNeighbor:
+            // Update if path through same neighbor changed
+            routingTable[destination].cost = newCost
+            updated = true
+    
+    if updated:
+        SendRoutingUpdate()  // Triggered update
+</code></pre></div></div>
+
+<h3 id="outcomes">Outcomes</h3>
+
+<ul>
+  <li><strong>Fast convergence:</strong> Network converges within seconds after topology changes</li>
+  <li><strong>Loop prevention:</strong> Successfully handles count-to-infinity with poisoned reverse</li>
+  <li><strong>Scalability:</strong> Tested with networks up to 40 nodes with stable routing behavior</li>
+</ul>
+
+<hr />
+
+<h2 id="component-2-link-state-routing-protocol">Component 2: Link State Routing Protocol</h2>
+
+<h3 id="problem-statement-1">Problem Statement</h3>
+
+<p>Achieve faster convergence and loop-free routing by giving each router complete network topology knowledge.</p>
+
+<h3 id="solution-dijkstras-shortest-path-algorithm">Solution: Dijkstra’s Shortest Path Algorithm</h3>
+
+<p><strong>Key Features:</strong></p>
+
+<ul>
+  <li><strong>Link State Advertisements (LSAs)</strong> - Broadcast network topology information</li>
+  <li><strong>Sequence numbers</strong> - Ensure latest topology information propagates</li>
+  <li><strong>Flooding mechanism</strong> - Reliably distribute LSAs across the network</li>
+  <li><strong>Shortest path computation</strong> - Run Dijkstra’s algorithm locally at each node</li>
+</ul>
+
+<h3 id="core-algorithm-pseudocode-1">Core Algorithm (Pseudocode)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Broadcast link state information
+function BroadcastLSA():
+    lsa = createLSA()
+    lsa.originNode = self
+    lsa.sequenceNumber = ++currentSequenceNumber
+    
+    for each neighbor in neighbors:
+        lsa.addLink(neighbor, linkCost(neighbor))
+    
+    for each neighbor in neighbors:
+        forward(lsa, neighbor)
+    
+    store(lsa)  // Store in local database
+
+// Process received LSA
+function ProcessLSA(lsa, fromNeighbor):
+    if lsa.sequenceNumber &lt;= storedLSAs[lsa.originNode].sequenceNumber:
+        return  // Old LSA, discard
+    
+    storedLSAs[lsa.originNode] = lsa
+    
+    // Flood to other neighbors
+    for each neighbor in neighbors:
+        if neighbor != fromNeighbor:
+            forward(lsa, neighbor)
+    
+    RunDijkstra()  // Recompute routing table
+
+// Dijkstra's shortest path computation
+function RunDijkstra():
+    unvisited = set(allNodes)
+    distance = {self: 0}
+    previous = {}
+    
+    for each node in allNodes:
+        if node != self:
+            distance[node] = INFINITY
+    
+    while unvisited is not empty:
+        current = node in unvisited with minimum distance[current]
+        unvisited.remove(current)
+        
+        for each neighbor of current from storedLSAs[current]:
+            alt = distance[current] + cost(current, neighbor)
+            if alt &lt; distance[neighbor]:
+                distance[neighbor] = alt
+                previous[neighbor] = current
+    
+    // Build routing table from shortest paths
+    BuildRoutingTableFromPaths(previous)
+</code></pre></div></div>
+
+<h3 id="outcomes-1">Outcomes</h3>
+
+<ul>
+  <li><strong>Rapid convergence:</strong> Faster than DV protocol due to complete topology knowledge</li>
+  <li><strong>Loop-free routing:</strong> Always computes optimal, loop-free paths</li>
+  <li><strong>Efficient flooding:</strong> LSAs propagate quickly with sequence number control</li>
+</ul>
+
+<hr />
+
+<h2 id="component-3-penn-search---distributed-p2p-search-system">Component 3: Penn Search - Distributed P2P Search System</h2>
+
+<h3 id="problem-statement-2">Problem Statement</h3>
+
+<p>Build a scalable, decentralized search system where documents are distributed across multiple nodes, allowing efficient keyword-based search without a central server.</p>
+
+<h3 id="solution-chord-dht--distributed-inverted-index">Solution: Chord DHT + Distributed Inverted Index</h3>
+
+<p><strong>Key Features:</strong></p>
+
+<ul>
+  <li><strong>Chord DHT overlay network</strong> - O(log N) lookup complexity</li>
+  <li><strong>Distributed inverted index</strong> - Keywords mapped to document lists across nodes</li>
+  <li><strong>Consistent hashing</strong> - SHA-1 based key distribution</li>
+  <li><strong>Fault tolerance</strong> - Graceful handling of node joins/leaves</li>
+  <li><strong>Stabilization protocol</strong> - Maintains correct successor/predecessor relationships</li>
+  <li><strong>Finger table optimization</strong> - Accelerates lookups with exponential distance routing</li>
+</ul>
+
+<h3 id="architecture">Architecture</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Penn Search Application
+    ├── Chord DHT Layer (Overlay Network)
+    │   ├── Join/Leave Operations
+    │   ├── Stabilization Protocol
+    │   ├── Finger Table Maintenance
+    │   └── Key Lookup (FindSuccessor)
+    └── Search Layer (Application)
+        ├── Inverted Index Publishing
+        ├── Multi-keyword Search
+        └── Result Aggregation
+</code></pre></div></div>
+
+<h3 id="chord-dht-core-operations-pseudocode">Chord DHT: Core Operations (Pseudocode)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Join the Chord ring
+function Join(landmarkNode):
+    if landmarkNode == null:
+        // First node in ring
+        predecessor = null
+        successor = self
+    else:
+        // Ask landmark to find our successor
+        successor = landmarkNode.FindSuccessor(hash(self.ipAddress))
+        predecessor = null
+    
+    InitializeFingerTable()
+    StartStabilizationTimer()
+
+// Find successor responsible for a key
+function FindSuccessor(key):
+    if key is between (self, successor]:
+        return successor
+    else:
+        // Forward to closest preceding node
+        node = ClosestPrecedingNode(key)
+        return node.FindSuccessor(key)
+
+// Find closest preceding node in finger table
+function ClosestPrecedingNode(key):
+    for i from M down to 1:  // M = 32 (finger table size)
+        if fingerTable[i] is between (self, key):
+            return fingerTable[i]
+    return self
+
+// Stabilization: Maintain correct successor
+function Stabilize():
+    x = successor.GetPredecessor()
+    if x is between (self, successor):
+        successor = x
+    successor.Notify(self)
+
+// Fix finger table entries incrementally
+function FixFingers():
+    nextFingerIndex = (nextFingerIndex + 1) % M
+    fingerTable[nextFingerIndex] = FindSuccessor(self + 2^nextFingerIndex)
+
+// Handle notification from potential predecessor
+function Notify(node):
+    if predecessor == null OR node is between (predecessor, self):
+        predecessor = node
+</code></pre></div></div>
+
+<h3 id="penn-search-inverted-index--search-pseudocode">Penn Search: Inverted Index &amp; Search (Pseudocode)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Publish document metadata (inverted index)
+function PublishInvertedList(metadataFile):
+    documents = ParseMetadata(metadataFile)
+    
+    for each document in documents:
+        for each keyword in document.keywords:
+            keywordHash = SHA1(keyword)
+            responsibleNode = FindSuccessor(keywordHash)
+            
+            invertedList = {keyword: keyword, docs: [document.id]}
+            SendInvertedList(responsibleNode, invertedList)
+
+// Store inverted list at responsible node
+function ReceiveInvertedList(keyword, documentList):
+    if keyword in localDatabase:
+        localDatabase[keyword].append(documentList)
+    else:
+        localDatabase[keyword] = documentList
+
+// Multi-keyword search
+function Search(keywords[]):
+    transactionId = getNextTransactionId()
+    searchTracker[transactionId] = {
+        keywords: keywords,
+        results: {},
+        pending: keywords.length
+    }
+    
+    for each keyword in keywords:
+        keywordHash = SHA1(keyword)
+        responsibleNode = FindSuccessor(keywordHash)
+        SendSearchRequest(responsibleNode, keyword, transactionId)
+
+// Process search response and aggregate results
+function ProcessSearchResponse(keyword, documentList, transactionId):
+    tracker = searchTracker[transactionId]
+    tracker.results[keyword] = documentList
+    tracker.pending--
+    
+    if tracker.pending == 0:
+        // All results received, compute intersection
+        finalResults = tracker.results[tracker.keywords[0]]
+        for i from 1 to tracker.keywords.length - 1:
+            finalResults = Intersection(finalResults, 
+                                      tracker.results[tracker.keywords[i]])
+        
+        DisplayResults(finalResults)
+
+// Compute intersection of document lists
+function Intersection(list1, list2):
+    result = []
+    for each doc in list1:
+        if doc in list2:
+            result.append(doc)
+    return result
+</code></pre></div></div>
+
+<h3 id="key-transfer-on-node-dynamics-pseudocode">Key Transfer on Node Dynamics (Pseudocode)</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Graceful leave: Transfer keys to successor
+function Leave():
+    keysToTransfer = []
+    
+    for each (keyword, docList) in localDatabase:
+        keysToTransfer.append({keyword: keyword, docs: docList})
+    
+    SendPassKeys(successor, keysToTransfer)
+    successor.predecessor = predecessor
+    predecessor.successor = successor
+
+// Receive keys when predecessor leaves
+function ReceivePassedKeys(keysToTransfer):
+    for each entry in keysToTransfer:
+        if entry.keyword in localDatabase:
+            localDatabase[entry.keyword].extend(entry.docs)
+        else:
+            localDatabase[entry.keyword] = entry.docs
+</code></pre></div></div>
+
+<h3 id="outcomes-2">Outcomes</h3>
+
+<ul>
+  <li><strong>Logarithmic lookup:</strong> O(log N) hops to find responsible node in N-node network</li>
+  <li><strong>Load balancing:</strong> Consistent hashing distributes keys evenly across nodes</li>
+  <li><strong>Fault tolerance:</strong> System remains operational during node joins/leaves with key transfer</li>
+  <li><strong>Multi-keyword search:</strong> Efficiently handles complex queries through result intersection</li>
+  <li><strong>Scalability:</strong> Successfully tested with 10+ node networks with multiple documents per node</li>
+</ul>
+
+<hr />
+
+<h2 id="testing--results">Testing &amp; Results</h2>
+
+<h3 id="performance-metrics">Performance Metrics</h3>
+
+<p><strong>Distance Vector Protocol:</strong></p>
+
+<ul>
+  <li>Average convergence time: 2-5 seconds after topology change</li>
+  <li>Memory overhead: O(N²) for N nodes (routing table storage)</li>
+  <li>Message complexity: O(N²) periodic updates</li>
+</ul>
+
+<p><strong>Link State Protocol:</strong></p>
+
+<ul>
+  <li>Average convergence time: 1-3 seconds after topology change</li>
+  <li>Memory overhead: O(N²) (complete topology database)</li>
+  <li>Message complexity: O(N·E) for LSA flooding (N nodes, E edges)</li>
+</ul>
+
+<p><strong>Chord DHT:</strong></p>
+
+<ul>
+  <li>Lookup hops: Average 3-4 hops in 10-node network (consistent with O(log N))</li>
+  <li>Join time: 2-5 seconds including stabilization</li>
+  <li>Finger table accuracy: &gt;95% after stabilization period</li>
+</ul>
+
+<h2 id="key-takeaways">Key Takeaways</h2>
+
+<p>This project provided hands-on experience with:</p>
+
+<ol>
+  <li><strong>Real-world networking protocols:</strong> Implemented actual routing algorithms used in production networks</li>
+  <li><strong>Distributed systems design:</strong> Built a complete P2P system from scratch with fault tolerance</li>
+  <li><strong>Large-scale C++ development:</strong> Managed a complex codebase with multiple interacting components</li>
+  <li><strong>Algorithm implementation:</strong> Translated theoretical algorithms into working code</li>
+  <li><strong>Performance analysis:</strong> Evaluated protocol behavior under various network conditions</li>
+</ol>
+
+<p>The experience gained from this project is directly applicable to building scalable backend systems, distributed databases, and networked applications in industry.</p>
+
+<hr />
+
+<h2 id="course-context">Course Context</h2>
+
+<p><strong>Course:</strong> CIS 5530 - Networked Systems, University of Pennsylvania<br />
+<strong>Semester:</strong> Spring 2025<br />
+<strong>Topics Covered:</strong> TCP/IP networking, routing protocols, distributed hash tables, P2P systems</p>
+
+<hr />
+
+<p><em>This project demonstrates proficiency in systems programming, distributed algorithms, and network protocol implementation - skills essential for backend engineering, infrastructure development, and distributed systems roles.</em></p>
 
 
 </div>

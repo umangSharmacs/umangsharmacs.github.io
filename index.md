@@ -17,7 +17,25 @@ title: Home
     <div class="hero-buttons-wrapper">
         <div class="hero-buttons">
             <a href="#projects" class="btn-primary">View My Work</a>
-            <a href="mailto:umangsharma.cs@gmail.com" class="btn-secondary">Get In Touch</a>
+            <a href="/data/Umang_CV_Final.pdf" target="_blank" class="btn-primary">Resume</a>
+            <div class="contact-expandable">
+                <a href="mailto:umangsharma.cs@gmail.com" class="btn-secondary btn-contact-main">Get In Touch</a>
+                <div class="contact-icons">
+                    <a href="https://github.com/umangSharmacs" target="_blank" class="contact-icon" aria-label="GitHub">
+                        <img src="/icons/github.png" alt="GitHub">
+                    </a>
+                    <a href="mailto:umangsharma.cs@gmail.com" class="contact-icon" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/umangsharmacs/" target="_blank" class="contact-icon" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -32,11 +50,12 @@ title: Home
         <div class="carousel-wrapper">
             <div class="carousel-track">
                 {% assign featured_projects = site.projects | where: "featured", true | sort: "date" | reverse %}
-                {% assign slides_count = featured_projects.size | divided_by: 4.0 | ceil %}
+                {% assign slides_count = featured_projects.size | divided_by: 3.0 | ceil %}
+                {% assign max_index = slides_count | minus: 1 %}
                 
-                {% for i in (0..slides_count) %}
-                    {% assign offset = i | times: 4 %}
-                    {% assign slide_projects = featured_projects | offset: offset | limit: 4 %}
+                {% for i in (0..max_index) %}
+                    {% assign offset = i | times: 3 %}
+                    {% assign slide_projects = featured_projects | offset: offset | limit: 3 %}
                     {% if slide_projects.size > 0 %}
                 <div class="carousel-slide">
                     {% for project in slide_projects %}
@@ -66,91 +85,40 @@ title: Home
 <section class="experience" id="experience">
     <h2>Work & Research Experience</h2>
 
-    <a href="/projects/needlespotter-intern/" class="card-link">
+    {% assign sorted_cards = site.cards | sort: "start_date" | reverse %}
+    {% for card in sorted_cards %}
+    <a href="/experience/{{ card.experience_slug }}/" class="card-link">
         <div class="experience-item">
             <div class="heading-with-icons">
-                <h3>AI and Data Systems Intern - NeedleSpotter Inc</h3>
+                <h3>{{ card.title }}</h3>
+                {% if card.github_link or card.paper_link or card.kaggle_link %}
                 <div class="icons">
-                    <a href="https://github.com/umangSharmacs/contentgen" onclick="event.stopPropagation();">
+                    {% if card.github_link %}
+                    <a href="{{ card.github_link }}" onclick="event.stopPropagation();">
                         <img src="/icons/github.png" alt="GitHub" class="icon">
                     </a>
-                </div>
-            </div>
-            <p class="date">June 2025 - August 2025</p>
-            <p class="skills">Technologies: Javascript, PHP, Python, AI</p>
-            <ul>
-                <li>Built an interactive dashboard for editing AI-generated medical tweets.</li>
-                <li>Developed RLHF pipelines, LLM fine-tuning loops, and GPT-based article rewriting tools tailored for clinical audiences.</li>
-            </ul>
-        </div>
-    </a>
-
-    <a href="/projects/upenn-research/" class="card-link">
-        <div class="experience-item">
-            <div class="heading-with-icons">
-                <h3>Research Assistant - University of Pennsylvania</h3>
-                <div class="icons">
-                    <a href="https://www.kaggle.com/code/umangsharmacs/roberta-predictions-analysis" onclick="event.stopPropagation();">
+                    {% endif %}
+                    {% if card.kaggle_link %}
+                    <a href="{{ card.kaggle_link }}" onclick="event.stopPropagation();">
                         <img src="/icons/kaggle-logo-transparent.svg" alt="Kaggle" class="icon">
                     </a>
-                </div>
-            </div>
-            <p class="date">August 2024 - Present</p>
-            <p class="skills">Technologies: RoBERTa, T5, Python, NLP, Machine Learning</p>
-            <ul>
-                <li>Email classification using RoBERTa, achieving 81% F1 score, and developed multi-class classification pipeline using T5.</li>
-                <li>Automated classification for 200,000+ emails, enabling behavioral pattern analysis.</li>
-            </ul>
-        </div>
-    </a>
-
-    <a href="/projects/zs-associate/" class="card-link">
-        <div class="experience-item">
-            <div class="heading-with-icons">
-                <h3>Decision Analytics Associate - ZS Associates</h3>
-            </div>
-            <p class="date">July 2022 - April 2024</p>
-            <p class="skills">Technologies: Python, Deep Learning, TFT, DeepAR, LSTM, Tableau, Random Forest</p>
-            <ul>
-                <li>Led market analysis using Random Forest Classifiers, optimizing budgets by 15% and increasing sales by 20%.</li>
-                <li>Developed Deep learning applications using TFT, DeepAR and LSTMs with 80% prediction accuracy.</li>
-            </ul>
-        </div>
-    </a>
-
-    <a href="/projects/zs-intern/" class="card-link">
-        <div class="experience-item">
-            <div class="heading-with-icons">
-                <h3>Decision Analytics Associate Intern - ZS Associates</h3>
-            </div>
-            <p class="date">January 2022 - June 2022</p>
-            <p class="skills">Technologies: Python, SQL, Tableau, Plotly, Bayesian Regression, ETL</p>
-            <ul>
-                <li>Implemented Bayesian Regression for market trend analysis, improving budget efficiency by 27%.</li>
-                <li>Designed ETL pipelines reducing processing time by 30% and developed visualization dashboards.</li>
-            </ul>
-        </div>
-    </a>
-
-    <a href="/projects/meeting-minutes-research/" class="card-link">
-        <div class="experience-item">
-            <div class="heading-with-icons">
-                <h3>Meeting Minutes Generation Research</h3>
-                <div class="icons">
-                    <a href="https://github.com/umangSharmacs/theTuringTestament" onclick="event.stopPropagation();">
-                        <img src="/icons/github.png" alt="GitHub" class="icon">
-                    </a>
-                    <a href="https://www.isca-archive.org/automin_2021/sharma21_automin.html" onclick="event.stopPropagation();">
+                    {% endif %}
+                    {% if card.paper_link %}
+                    <a href="{{ card.paper_link }}" onclick="event.stopPropagation();">
                         <img src="/icons/pdf.png" alt="PDF" class="icon">
                     </a>
+                    {% endif %}
                 </div>
+                {% endif %}
             </div>
-            <p class="date">September 2021</p>
-            <p class="skills">Technologies: TOPSIS, MCDA, BERT, T5, NLP</p>
+            <p class="date">{{ card.start_date | date: "%B %Y" }} - {% if card.end_date == "Present" %}{{ card.end_date }}{% else %}{{ card.end_date | date: "%B %Y" }}{% endif %}</p>
+            <p class="skills">Technologies: {{ card.technologies }}</p>
             <ul>
-                <li>Developed MCDA pipeline analyzing 2M+ data points for meeting minutes generation.</li>
-                <li>Achieved 128% better performance than BERT and T5 models using TOPSIS ranking.</li>
+                {% for bullet in card.bullet_points %}
+                <li>{{ bullet }}</li>
+                {% endfor %}
             </ul>
         </div>
     </a>
+    {% endfor %}
 </section>

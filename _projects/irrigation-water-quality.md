@@ -4,7 +4,7 @@ title: Irrigation Water Quality Classifier
 permalink: /projects/irrigation-water-quality/
 date: January 2021 - January 2022
 technologies: Random Forest, Python, Machine Learning
-featured: true
+featured: false
 github_link: https://github.com/umangSharmacs/capstone
 ---
 

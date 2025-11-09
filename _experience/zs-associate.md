@@ -1,8 +1,8 @@
 ---
-layout: project
+layout: experience
 title: Decision Analytics Associate - ZS Associates
-permalink: /projects/zs-associate/
-date: July 2022 - April 2024
+start_date: 2022-07-01
+end_date: 2024-04-30
 technologies: Python, Deep Learning, TFT, DeepAR, LSTM, Tableau, Random Forest
 ---
 

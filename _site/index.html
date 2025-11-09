@@ -163,8 +163,8 @@
 
         .btn-primary:hover {
             background: #2d2d2d;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
         }
 
         .btn-secondary {
@@ -175,10 +175,84 @@
 
         .btn-secondary:hover {
             background: #f7fafc;
-            transform: translateY(-2px);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
 
+        /* Expandable Contact Button */
+        .contact-expandable {
+            position: relative;
+            display: inline-block;
+        }
 
+        .btn-contact-main {
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-expandable:hover .btn-contact-main {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .contact-icons {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out 0.1s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .contact-expandable:hover .contact-icons {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .contact-icon img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #1a1a1a;
+            transition: fill 0.3s;
+        }
+
+        .contact-icon:hover {
+            background: #1a1a1a;
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .contact-icon:hover svg {
+            fill: white;
+        }
+
+        .contact-icon:hover img {
+            filter: invert(1) brightness(2);
+        }
 
         /* Projects Section */
         .projects {
@@ -187,6 +261,7 @@
             padding: 60px 5%;
             position: relative;
             z-index: 1;
+            background: #f8f9fa;
         }
 
         .projects h2 {
@@ -212,27 +287,35 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            background: #f8f9fa;
+            padding: 15px 0;
         }
 
         .carousel-wrapper {
-            overflow: hidden;
             flex: 1;
+            background: #f8f9fa;
         }
 
         .carousel-track {
             display: flex;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             gap: 30px;
+            background: #f8f9fa;
         }
 
         .carousel-slide {
-            min-width: 100%;
-            flex-shrink: 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            width: 100%;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            grid-auto-rows: 1fr;
             gap: 25px;
-            background: transparent;
+            background: #f8f9fa;
+            align-items: stretch;
+        }
+        
+        .carousel-slide > * {
+            min-width: 0;
+            height: 100%;
         }
 
         .carousel-slide a.card-link {
@@ -243,13 +326,13 @@
 
         /* Project Card Styles */
         .project-card {
-            padding: 30px 20px;
+            padding: 35px 25px;
             border-radius: 12px;
             background: white;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 2px solid #e2e8f0;
             transition: all 0.3s;
             text-align: center;
-            min-height: 150px;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -257,13 +340,13 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-15px);
+            border-color: #cbd5e0;
         }
 
         .project-card h3 {
             margin: 0 0 0.5rem 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #1a1a1a;
             font-weight: 700;
         }
@@ -271,7 +354,7 @@
         .project-subtitle {
             margin: 0;
             color: #718096;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             line-height: 1.4;
         }
 
@@ -296,7 +379,7 @@
         .carousel-arrow:hover {
             background: #1a1a1a;
             color: white;
-            transform: scale(1.1);
+            transform: translateY(-10px) scale(1.1);
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
@@ -377,7 +460,7 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
 
-        .experience-item a.card-link {
+        .experience a.card-link {
             text-decoration: none;
             color: inherit;
             display: block;
@@ -513,8 +596,7 @@
 
             .carousel-slide {
                 min-width: 100%;
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: auto;
+                grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
             }
 
@@ -571,6 +653,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/projects/">Projects</a></li>
                 <li><a href="/#experience">Experience</a></li>
+                <li><a href="/data/Umang_CV_Final.pdf" target="_blank">Resume</a></li>
                 <li><a href="mailto:umangsharma.cs@gmail.com">Contact</a></li>
             </ul>
         </div>
@@ -590,7 +673,25 @@
     <div class="hero-buttons-wrapper">
         <div class="hero-buttons">
             <a href="#projects" class="btn-primary">View My Work</a>
-            <a href="mailto:umangsharma.cs@gmail.com" class="btn-secondary">Get In Touch</a>
+            <a href="/data/Umang_CV_Final.pdf" target="_blank" class="btn-primary">Resume</a>
+            <div class="contact-expandable">
+                <a href="mailto:umangsharma.cs@gmail.com" class="btn-secondary btn-contact-main">Get In Touch</a>
+                <div class="contact-icons">
+                    <a href="https://github.com/umangSharmacs" target="_blank" class="contact-icon" aria-label="GitHub">
+                        <img src="/icons/github.png" alt="GitHub" />
+                    </a>
+                    <a href="mailto:umangsharma.cs@gmail.com" class="contact-icon" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/umangsharmacs/" target="_blank" class="contact-icon" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -608,41 +709,6 @@
                 
                 
                 
-                    
-                    
-                    
-                <div class="carousel-slide">
-                    
-                    <a href="/projects/Email_CRM_System/" class="card-link">
-                        <div class="project-card">
-                            <h3>Email CRM System</h3>
-                            <p class="project-subtitle">React, PHP, n8n, RAG</p>
-                        </div>
-                    </a>
-                    
-                    <a href="/projects/chord/" class="card-link">
-                        <div class="project-card">
-                            <h3>CHORD - Collaborative Healthcare Operations Research Dashboard</h3>
-                            <p class="project-subtitle">Python, Flask, PostgreSQL, D3.js, React</p>
-                        </div>
-                    </a>
-                    
-                    <a href="/projects/autonomous-zooming-cameraman/" class="card-link">
-                        <div class="project-card">
-                            <h3>Autonomous Zooming Cameraman</h3>
-                            <p class="project-subtitle">YOLOv11, CSRT, Computer Vision, OpenAI GPT-Vision API</p>
-                        </div>
-                    </a>
-                    
-                    <a href="/projects/irrigation-water-quality/" class="card-link">
-                        <div class="project-card">
-                            <h3>Irrigation Water Quality Classifier</h3>
-                            <p class="project-subtitle">Random Forest, Python, Machine Learning</p>
-                        </div>
-                    </a>
-                    
-                </div>
-                    
                 
                     
                     
@@ -658,8 +724,8 @@
                     
                     <a href="/projects/chord/" class="card-link">
                         <div class="project-card">
-                            <h3>CHORD - Collaborative Healthcare Operations Research Dashboard</h3>
-                            <p class="project-subtitle">Python, Flask, PostgreSQL, D3.js, React</p>
+                            <h3>Distributed Network Simulation &amp; P2P Search System</h3>
+                            <p class="project-subtitle">C++, NS-3 Network Simulator, Socket Programming, Distributed Systems, DHT (Chord Protocol)</p>
                         </div>
                     </a>
                     
@@ -667,13 +733,6 @@
                         <div class="project-card">
                             <h3>Autonomous Zooming Cameraman</h3>
                             <p class="project-subtitle">YOLOv11, CSRT, Computer Vision, OpenAI GPT-Vision API</p>
-                        </div>
-                    </a>
-                    
-                    <a href="/projects/irrigation-water-quality/" class="card-link">
-                        <div class="project-card">
-                            <h3>Irrigation Water Quality Classifier</h3>
-                            <p class="project-subtitle">Random Forest, Python, Machine Learning</p>
                         </div>
                     </a>
                     
@@ -696,93 +755,134 @@
 <section class="experience" id="experience">
     <h2>Work &amp; Research Experience</h2>
 
-    <a href="/projects/needlespotter-intern/" class="card-link">
+    
+    
+    <a href="/experience/needlespotter-intern/" class="card-link">
         <div class="experience-item">
             <div class="heading-with-icons">
                 <h3>AI and Data Systems Intern - NeedleSpotter Inc</h3>
+                
                 <div class="icons">
+                    
                     <a href="https://github.com/umangSharmacs/contentgen" onclick="event.stopPropagation();">
                         <img src="/icons/github.png" alt="GitHub" class="icon" />
                     </a>
+                    
+                    
+                    
                 </div>
+                
             </div>
-            <p class="date">June 2025 - August 2025</p>
-            <p class="skills">Technologies: Javascript, PHP, Python, AI</p>
+            <p class="date">June 2025 - Present</p>
+            <p class="skills">Technologies: React, PHP, Python, LLMs, RAG, RLHF</p>
             <ul>
+                
                 <li>Built an interactive dashboard for editing AI-generated medical tweets.</li>
+                
                 <li>Developed RLHF pipelines, LLM fine-tuning loops, and GPT-based article rewriting tools tailored for clinical audiences.</li>
+                
             </ul>
         </div>
     </a>
-
-    <a href="/projects/upenn-research/" class="card-link">
+    
+    <a href="/experience/upenn-research/" class="card-link">
         <div class="experience-item">
             <div class="heading-with-icons">
                 <h3>Research Assistant - University of Pennsylvania</h3>
+                
                 <div class="icons">
+                    
+                    
                     <a href="https://www.kaggle.com/code/umangsharmacs/roberta-predictions-analysis" onclick="event.stopPropagation();">
                         <img src="/icons/kaggle-logo-transparent.svg" alt="Kaggle" class="icon" />
                     </a>
+                    
+                    
                 </div>
+                
             </div>
-            <p class="date">August 2024 - Present</p>
+            <p class="date">August 2024 - July 2025</p>
             <p class="skills">Technologies: RoBERTa, T5, Python, NLP, Machine Learning</p>
             <ul>
+                
                 <li>Email classification using RoBERTa, achieving 81% F1 score, and developed multi-class classification pipeline using T5.</li>
+                
                 <li>Automated classification for 200,000+ emails, enabling behavioral pattern analysis.</li>
+                
             </ul>
         </div>
     </a>
-
-    <a href="/projects/zs-associate/" class="card-link">
+    
+    <a href="/experience/zs-associate/" class="card-link">
         <div class="experience-item">
             <div class="heading-with-icons">
                 <h3>Decision Analytics Associate - ZS Associates</h3>
+                
             </div>
             <p class="date">July 2022 - April 2024</p>
             <p class="skills">Technologies: Python, Deep Learning, TFT, DeepAR, LSTM, Tableau, Random Forest</p>
             <ul>
-                <li>Led market analysis using Random Forest Classifiers, optimizing budgets by 15% and increasing sales by 20%.</li>
-                <li>Developed Deep learning applications using TFT, DeepAR and LSTMs with 80% prediction accuracy.</li>
+                
+                <li>Developed and deployed scalable ML models (DeepAR, TFTs, LSTMs) with CI/CD pipelines, reducing manual forecasting by 50% and achieving 80% prediction accuracy.</li>
+                
+                <li>Built and optimized ETL pipelines improving data processing efficiency by 40%, and created interactive Tableau dashboards increasing client engagement by 30%.</li>
+                
             </ul>
         </div>
     </a>
-
-    <a href="/projects/zs-intern/" class="card-link">
+    
+    <a href="/experience/zs-intern/" class="card-link">
         <div class="experience-item">
             <div class="heading-with-icons">
                 <h3>Decision Analytics Associate Intern - ZS Associates</h3>
+                
             </div>
             <p class="date">January 2022 - June 2022</p>
-            <p class="skills">Technologies: Python, SQL, Tableau, Plotly, Bayesian Regression, ETL</p>
+            <p class="skills">Technologies: Python, SQL, Docker, GitHub Actions, Bayesian Regression, ETL</p>
             <ul>
-                <li>Implemented Bayesian Regression for market trend analysis, improving budget efficiency by 27%.</li>
-                <li>Designed ETL pipelines reducing processing time by 30% and developed visualization dashboards.</li>
+                
+                <li>Automated ETL workflows using Python and SQL, reducing data processing time by 30% and improving data reliability.</li>
+                
+                <li>Integrated CI/CD workflows for ML models using Docker and GitHub Actions, streamlining deployment and cutting debugging time by 40%.</li>
+                
+                <li>Leveraged Bayesian regression models to analyze market trends, leading to a 27% increase in budget allocation efficiency.</li>
+                
             </ul>
         </div>
     </a>
-
-    <a href="/projects/meeting-minutes-research/" class="card-link">
+    
+    <a href="/experience/meeting-minutes-research/" class="card-link">
         <div class="experience-item">
             <div class="heading-with-icons">
                 <h3>Meeting Minutes Generation Research</h3>
+                
                 <div class="icons">
+                    
                     <a href="https://github.com/umangSharmacs/theTuringTestament" onclick="event.stopPropagation();">
                         <img src="/icons/github.png" alt="GitHub" class="icon" />
                     </a>
+                    
+                    
+                    
                     <a href="https://www.isca-archive.org/automin_2021/sharma21_automin.html" onclick="event.stopPropagation();">
                         <img src="/icons/pdf.png" alt="PDF" class="icon" />
                     </a>
+                    
                 </div>
+                
             </div>
-            <p class="date">September 2021</p>
+            <p class="date">September 2021 - September 2021</p>
             <p class="skills">Technologies: TOPSIS, MCDA, BERT, T5, NLP</p>
             <ul>
+                
                 <li>Developed MCDA pipeline analyzing 2M+ data points for meeting minutes generation.</li>
+                
                 <li>Achieved 128% better performance than BERT and T5 models using TOPSIS ranking.</li>
+                
             </ul>
         </div>
     </a>
+    
 </section>
 
 

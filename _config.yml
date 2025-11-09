@@ -21,6 +21,11 @@ collections:
   projects:
     output: true
     permalink: /projects/:name/
+  experience:
+    output: true
+    permalink: /experience/:name/
+  cards:
+    output: false
 
 # Collection defaults
 defaults:
@@ -29,4 +34,9 @@ defaults:
       type: "projects"
     values:
       layout: "project"
+  - scope:
+      path: ""
+      type: "experience"
+    values:
+      layout: "experience"
 
