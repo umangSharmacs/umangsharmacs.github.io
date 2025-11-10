@@ -12,6 +12,14 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  math_engine_opts:
+    preview: false
+
 # Show Projects in the top nav
 header_pages:
   - projects.md

@@ -305,17 +305,31 @@
 
         .carousel-slide {
             width: 100%;
-            display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(240px, 1fr));
             grid-auto-rows: 1fr;
             gap: 25px;
             background: #f8f9fa;
             align-items: stretch;
+            justify-content: center;
         }
         
         .carousel-slide > * {
             min-width: 0;
             height: 100%;
+        }
+
+        .carousel-slide.cards-2 {
+            grid-template-columns: repeat(2, minmax(260px, 1fr));
+        }
+
+        .carousel-slide.cards-1 {
+            grid-template-columns: minmax(280px, 480px);
+            justify-items: center;
+        }
+
+        .carousel-slide.cards-1 .project-card {
+            width: 100%;
         }
 
         .carousel-slide a.card-link {
@@ -644,6 +658,20 @@
             }
         }
     </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(','\\)'], ['$', '$']],
+                displayMath: [['\\[','\\]'], ['$$','$$']]
+            },
+            options: {
+                renderActions: {
+                    addMenu: []
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <nav>
@@ -673,6 +701,13 @@
             if (!track || slides.length === 0) return;
 
             let currentIndex = 0;
+
+            slides.forEach((slide) => {
+                const cardCount = slide.querySelectorAll('.project-card').length;
+                if (cardCount > 0 && cardCount < 3) {
+                    slide.classList.add(`cards-${cardCount}`);
+                }
+            });
 
             function updateCarousel() {
                 const slideWidth = slides[0].offsetWidth;
