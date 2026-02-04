@@ -144,21 +144,25 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn-primary, .btn-secondary {
-            padding: 0.9rem 2rem;
+            padding: 0.7rem 2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s;
             display: inline-block;
+            box-sizing: border-box;
+            line-height: 1.5;
         }
 
         .btn-primary {
             background: #1a1a1a;
             color: white;
+            border: 2px solid transparent;
         }
 
         .btn-primary:hover {
@@ -182,18 +186,68 @@
         /* Expandable Contact Button */
         .contact-expandable {
             position: relative;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 175px;
+            height: fit-content;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .contact-expandable {
+                min-width: 175px;
+            }
         }
 
         .btn-contact-main {
             position: relative;
             z-index: 1;
-            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0;
         }
 
-        .contact-expandable:hover .btn-contact-main {
-            opacity: 0;
-            pointer-events: none;
+        @media (hover: hover) and (pointer: fine) {
+            .contact-expandable:hover .btn-contact-main {
+                opacity: 0;
+                transform: scale(0.8);
+                pointer-events: none;
+            }
+
+            .contact-expandable:hover .contact-icons {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: white;
+                border: 2px solid #1a1a1a;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                text-decoration: none;
+                flex-shrink: 0;
+                transform: scale(0);
+            }
+
+            .contact-expandable:hover .contact-icon:nth-child(1) {
+                transform: scale(1);
+                transition-delay: 0.1s;
+            }
+
+            .contact-expandable:hover .contact-icon:nth-child(2) {
+                transform: scale(1);
+                transition-delay: 0.2s;
+            }
+
+            .contact-expandable:hover .contact-icon:nth-child(3) {
+                transform: scale(1);
+                transition-delay: 0.3s;
+            }
         }
 
         .contact-icons {
@@ -204,14 +258,9 @@
             display: flex;
             gap: 10px;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out 0.1s;
+            transition: opacity 0.3s ease-in-out;
             pointer-events: none;
-            z-index: 2;
-        }
-
-        .contact-expandable:hover .contact-icons {
-            opacity: 1;
-            pointer-events: all;
+            z-index: 0;
         }
 
         .contact-icon {
@@ -851,7 +900,7 @@
     
     <div class="project-meta">
         
-        <div class="project-date">2022-01-01 00:00:00 -0500</div>
+        <div class="project-date">2022-01-01 00:00:00 +0530</div>
         
         
         
@@ -1015,6 +1064,36 @@
 
             // Initialize
             updateCarousel();
+        });
+
+        // Touch-friendly contact button toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactExpandable = document.querySelector('.contact-expandable');
+            const contactButton = document.querySelector('.btn-contact-main');
+
+            if (contactExpandable && contactButton) {
+                // Only add click handler for touch devices
+                if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                    contactButton.addEventListener('click', function(e) {
+                        // Only prevent default if it's the mailto link
+                        if (contactExpandable.classList.contains('active')) {
+                            // Let the mailto link work
+                            return;
+                        } else {
+                            // Prevent the link and toggle icons
+                            e.preventDefault();
+                            contactExpandable.classList.toggle('active');
+                        }
+                    });
+
+                    // Close when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!contactExpandable.contains(e.target)) {
+                            contactExpandable.classList.remove('active');
+                        }
+                    });
+                }
+            }
         });
     </script>
 </body>
