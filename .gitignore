@@ -1,1 +1,5 @@
 .jekyll-cache/Jekyll/*
+misc/invitation/.godot/
+misc/invitation/elleATIC/.godot/
+*.import
+.DS_Store

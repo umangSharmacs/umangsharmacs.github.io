@@ -1,0 +1,56 @@
+<style>
+    .section-view {
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .section-view h1 {
+        font-size: 2.5rem;
+        color: #123524;
+        margin-bottom: 1.5rem;
+    }
+
+    .back-btn {
+        background: linear-gradient(135deg, #e8f5ed 0%, #d4ede0 100%);
+        border: 2px solid #a8d5ba;
+        padding: 10px 20px;
+        border-radius: 12px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 2rem;
+        transition: all 0.3s;
+        color: #123524;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .back-btn:hover {
+        background: linear-gradient(135deg, #d4ede0 0%, #c8e6d3 100%);
+        border-color: #123524;
+        transform: translateX(-3px);
+    }
+</style>
+
+<div class="section-view">
+    <a href="/invitation/hub/" class="back-btn">← Back to Hub</a>
+    <h1>✍️ Writings</h1>
+    <p>Writings section coming soon...</p>
+</div>
+
+<script>
+    // Check authentication
+    window.addEventListener('DOMContentLoaded', function() {
+        if (sessionStorage.getItem('invitation_authenticated') !== 'true') {
+            window.location.href = '/invitation/';
+        }
+
+        // Hide banner on section pages
+        const banner = document.querySelector('.invitation-banner');
+        if (banner) {
+            banner.style.display = 'none';
+        }
+    });
+</script>
+

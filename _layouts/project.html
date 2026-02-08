@@ -3,6 +3,23 @@ layout: default
 ---
 
 <style>
+    :root {
+        /* Theme Colors */
+        --color-primary: #123524;
+        --color-secondary: #00a767;
+        --color-accent: #eefdf4;
+        --color-background: #e8f3f5;
+        --color-white: #ffffff;
+        --color-text-primary: #123524;
+        --color-text-secondary: #4a5568;
+        --color-text-muted: #718096;
+        --color-heading-tertiary: #2d5a3f;
+        --color-border-light: #e2e8f0;
+        --color-border-medium: #cbd5e0;
+        --color-code-text: #e0e0e0;
+        --color-code-border: #1d4028;
+    }
+
     .project-header {
         max-width: 1000px;
         margin: 0 auto;
@@ -12,7 +29,7 @@ layout: default
     .project-header h1 {
         font-size: 2.5em;
         margin-bottom: 10px;
-        color: #2c3e50;
+        color: var(--color-primary);
     }
 
     .project-meta {
@@ -23,12 +40,12 @@ layout: default
     }
 
     .project-date {
-        color: #666;
+        color: var(--color-text-muted);
         font-style: italic;
     }
 
     .project-technologies {
-        color: #666;
+        color: var(--color-text-muted);
         font-style: italic;
     }
 
@@ -43,7 +60,7 @@ layout: default
         align-items: center;
         gap: 8px;
         padding: 8px 16px;
-        background-color: #2c3e50;
+        background-color: var(--color-primary);
         color: white;
         text-decoration: none;
         border-radius: 5px;
@@ -51,7 +68,7 @@ layout: default
     }
 
     .project-links a:hover {
-        background-color: #1a252f;
+        background-color: var(--color-secondary);
     }
 
     .project-links img {
@@ -64,26 +81,26 @@ layout: default
         max-width: 1000px;
         margin: 0 auto;
         padding: 20px;
-        background-color: #ffffff;
+        background-color: var(--color-white);
     }
 
     .project-content h2 {
-        color: #2c3e50;
+        color: var(--color-primary);
         margin-top: 30px;
         margin-bottom: 15px;
-        border-bottom: 2px solid #e0e0e0;
+        border-bottom: 2px solid var(--color-border-light);
         padding-bottom: 10px;
     }
 
     .project-content h3 {
-        color: #34495e;
+        color: var(--color-heading-tertiary);
         margin-top: 20px;
         margin-bottom: 10px;
     }
 
     .project-content p {
         line-height: 1.8;
-        color: #444;
+        color: var(--color-text-secondary);
         margin-bottom: 15px;
     }
 
@@ -102,7 +119,7 @@ layout: default
         .project-content li {
             margin-bottom: 10px;
             line-height: 1.6;
-            color: #444;
+            color: var(--color-text-secondary);
         }
 
         .project-content img {
@@ -114,8 +131,8 @@ layout: default
 
         /* Code styling */
         .project-content code {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            background-color: var(--color-primary);
+            color: var(--color-code-text);
             padding: 2px 6px;
             border-radius: 4px;
             font-family: 'Courier New', Courier, monospace;
@@ -123,13 +140,13 @@ layout: default
         }
 
         .project-content pre {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            background-color: var(--color-primary);
+            color: var(--color-code-text);
             padding: 20px;
             border-radius: 8px;
             overflow-x: auto;
             margin: 20px 0;
-            border: 1px solid #333;
+            border: 1px solid var(--color-code-border);
         }
 
         .project-content pre code {
@@ -147,7 +164,7 @@ layout: default
     }
 
     .back-link a {
-        color: #2c3e50;
+        color: var(--color-primary);
         text-decoration: none;
         font-size: 1.1em;
     }

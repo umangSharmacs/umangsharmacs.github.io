@@ -5,8 +5,22 @@ permalink: /projects/
 ---
 
 <style>
+    :root {
+        /* Theme Colors */
+        --color-primary: #123524;
+        --color-secondary: #00a767;
+        --color-accent: #eefdf4;
+        --color-background: #e8f3f5;
+        --color-white: #ffffff;
+        --color-text-primary: #123524;
+        --color-text-secondary: #4a5568;
+        --color-text-muted: #718096;
+        --color-border-light: #e2e8f0;
+        --color-border-medium: #cbd5e0;
+    }
+
     body {
-        background: #f8f9fa !important;
+        background: var(--color-background) !important;
     }
 
     .projects-page {
@@ -18,14 +32,14 @@ permalink: /projects/
     .projects-page h1 {
         font-size: 3rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: var(--color-primary);
         text-align: center;
         margin-bottom: 1rem;
     }
 
     .page-subtitle {
         text-align: center;
-        color: #718096;
+        color: var(--color-text-muted);
         font-size: 1.2rem;
         margin-bottom: 4rem;
         max-width: 800px;
@@ -40,17 +54,17 @@ permalink: /projects/
     }
 
     .project-card-wrapper {
-        background: #ffffff;
+        background: var(--color-white);
         border-radius: 16px;
         padding: 40px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--color-border-light);
         transition: all 0.3s ease;
         position: relative;
     }
 
     .project-card-wrapper:hover {
         transform: translateY(-5px);
-        border-color: #cbd5e0;
+        border-color: var(--color-secondary);
     }
 
     .project-card-link {
@@ -68,7 +82,7 @@ permalink: /projects/
     .project-title {
         font-size: 1.6rem;
         font-weight: 700;
-        color: #1a1a1a;
+        color: var(--color-primary);
         margin: 0;
         flex: 1;
         padding-right: 20px;
@@ -96,24 +110,24 @@ permalink: /projects/
     }
 
     .project-date {
-        color: #718096;
+        color: var(--color-text-muted);
         font-size: 0.95rem;
         font-style: italic;
         margin: 0 0 20px 0;
     }
 
     .project-description {
-        color: #4a5568;
+        color: var(--color-text-secondary);
         line-height: 1.7;
         margin: 0 0 20px 0;
         font-size: 1rem;
     }
 
     .project-tech {
-        color: #718096;
+        color: var(--color-text-muted);
         font-size: 0.9rem;
         font-weight: 500;
-        border-top: 1px solid #e2e8f0;
+        border-top: 1px solid var(--color-border-light);
         padding-top: 15px;
         margin: 0;
     }

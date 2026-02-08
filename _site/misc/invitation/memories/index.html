@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories Photo Gallery - Umang Sharma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Theme Colors */
+            --color-primary: #123524;
+            --color-secondary: #00a767;
+            --color-accent: #eefdf4;
+            --color-background: #e8f3f5;
+
+            /* UI Colors */
+            --color-white: #ffffff;
+            --color-text-primary: #123524;
+            --color-text-secondary: #4a5568;
+            --color-text-muted: #718096;
+
+            /* Border Colors */
+            --color-border-light: #e2e8f0;
+            --color-border-medium: #cbd5e0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-background);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-primary);
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-background);
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--color-background);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, opacity 0.3s;
+            opacity: 0.9;
+        }
+
+        nav .nav-links a:hover {
+            opacity: 1;
+            color: var(--color-background);
+        }
+
+        /* Hero Section - Combined */
+        .hero-combined {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 80px;
+            z-index: 1;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin: 0 auto;
+        }
+
+        .hero-image-section {
+            flex-shrink: 0;
+        }
+
+        .hero-profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border: 5px solid var(--color-white);
+        }
+
+        .hero-text-section {
+            flex: 1;
+        }
+
+        .hero-text-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 0.7rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            box-sizing: border-box;
+            line-height: 1.5;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-secondary);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-accent);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Expandable Contact Button */
+        .contact-expandable {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 175px;
+            height: fit-content;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .contact-expandable {
+                min-width: 175px;
+            }
+        }
+
+        .btn-contact-main {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .contact-expandable:hover .btn-contact-main {
+                opacity: 0;
+                transform: scale(0.8);
+                pointer-events: none;
+            }
+
+            .contact-expandable:hover .contact-icons {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .contact-icon {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: white;
+                border: 2px solid var(--color-primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                text-decoration: none;
+                flex-shrink: 0;
+                transform: scale(0);
+            }
+
+            .contact-expandable:hover .contact-icon:nth-child(1) {
+                transform: scale(1);
+                transition-delay: 0.1s;
+            }
+
+            .contact-expandable:hover .contact-icon:nth-child(2) {
+                transform: scale(1);
+                transition-delay: 0.2s;
+            }
+
+            .contact-expandable:hover .contact-icon:nth-child(3) {
+                transform: scale(1);
+                transition-delay: 0.3s;
+            }
+        }
+
+        .contact-icons {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .contact-icon img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+
+        .contact-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-primary);
+            transition: fill 0.3s;
+        }
+
+        .contact-icon:hover {
+            background: var(--color-primary);
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .contact-icon:hover svg {
+            fill: white;
+        }
+
+        .contact-icon:hover img {
+            filter: invert(1) brightness(2);
+        }
+
+        /* Projects Section */
+        .projects {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 5%;
+            position: relative;
+            z-index: 1;
+            background: var(--color-background);
+        }
+
+        .projects h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--color-background);
+            padding: 15px 0;
+        }
+
+        .carousel-wrapper {
+            flex: 1;
+            background: var(--color-background);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 30px;
+            background: var(--color-background);
+        }
+
+        .carousel-slide {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(240px, 1fr));
+            grid-auto-rows: 1fr;
+            gap: 25px;
+            background: var(--color-background);
+            align-items: stretch;
+            justify-content: center;
+        }
+        
+        .carousel-slide > * {
+            min-width: 0;
+            height: 100%;
+        }
+
+        .carousel-slide.cards-2 {
+            grid-template-columns: repeat(2, minmax(260px, 1fr));
+        }
+
+        .carousel-slide.cards-1 {
+            grid-template-columns: minmax(280px, 480px);
+            justify-items: center;
+        }
+
+        .carousel-slide.cards-1 .project-card {
+            width: 100%;
+        }
+
+        .carousel-slide a.card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* Project Card Styles */
+        .project-card {
+            padding: 35px 25px;
+            border-radius: 12px;
+            background: white;
+            border: 2px solid var(--color-border-light);
+            transition: all 0.3s;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--color-secondary);
+        }
+
+        .project-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.95rem;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .project-subtitle {
+            margin: 0;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        /* Carousel Arrows */
+        .carousel-arrow {
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .carousel-arrow:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .carousel-arrow:active {
+            transform: scale(0.95);
+        }
+
+        .carousel-arrow:disabled {
+            background: var(--color-border-light);
+            color: var(--color-border-medium);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .carousel-arrow:disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: var(--color-border-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .carousel-dot:hover {
+            background: var(--color-secondary);
+            transform: scale(1.3);
+        }
+
+        .carousel-dot.active {
+            background: var(--color-secondary);
+            width: 28px;
+            border-radius: 5px;
+        }
+
+        /* Experience Section */
+        .experience {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .experience-item {
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .experience a.card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .heading-with-icons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .heading-with-icons h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .icon {
+            height: 24px;
+            width: auto;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .icon:hover {
+            opacity: 1;
+        }
+
+        .date {
+            color: var(--color-text-muted);
+            font-style: italic;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .skills {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .experience-item ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .experience-item li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                gap: 40px;
+            }
+
+            .hero-profile-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-text-section h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .hero-combined {
+                min-height: auto;
+                padding: 100px 5% 60px;
+            }
+
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-text-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .projects h2,
+            .experience h2 {
+                font-size: 2rem;
+            }
+
+            .carousel-container {
+                gap: 12px;
+            }
+
+            .carousel-arrow {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+
+            .carousel-slide {
+                min-width: 100%;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .project-card {
+                padding: 18px 15px;
+                min-height: 80px;
+            }
+
+            .project-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .project-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .experience-item {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            nav .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .carousel-slide {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 15px;
+            }
+        }
+    </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(','\\)'], ['$', '$']],
+                displayMath: [['\\[','\\]'], ['$$','$$']]
+            },
+            options: {
+                renderActions: {
+                    addMenu: []
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">US</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/#experience">Experience</a></li>
+                <li><a href="/data/Umang_CV_Final.pdf" target="_blank">Resume</a></li>
+                <li><a href="mailto:umangsharma.cs@gmail.com">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Memories Photo Gallery</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="memories-photo-gallery">Memories Photo Gallery</h1>
+
+<p>This folder contains photos that will be <strong>automatically</strong> displayed in the Memories section of the invitation page.</p>
+
+<h2 id="how-to-add-photos">How to Add Photos:</h2>
+
+<ol>
+  <li><strong>Simply drop your image files</strong> into this folder (JPG, JPEG, PNG, GIF, WEBP, SVG)</li>
+  <li>Run <code class="language-plaintext highlighter-rouge">bundle exec jekyll build</code> to rebuild the site</li>
+  <li>That’s it! Photos will automatically appear in the gallery</li>
+</ol>
+
+<h2 id="automatic-features">Automatic Features:</h2>
+
+<ul>
+  <li>✨ <strong>Auto-detection</strong>: All image files are automatically found and displayed</li>
+  <li>📝 <strong>Auto-captions</strong>: Filenames are converted to captions (e.g., <code class="language-plaintext highlighter-rouge">summer-vacation.jpg</code> → “Summer vacation”)</li>
+  <li>🔄 <strong>No manual editing</strong>: No need to edit any code or arrays</li>
+  <li>🖼️ <strong>Supported formats</strong>: JPG, JPEG, PNG, GIF, WEBP, SVG</li>
+</ul>
+
+<h2 id="tips">Tips:</h2>
+
+<ul>
+  <li><strong>Use descriptive filenames</strong> - they become the captions!
+    <ul>
+      <li>Good: <code class="language-plaintext highlighter-rouge">beach-sunset-2024.jpg</code> → “Beach sunset 2024”</li>
+      <li>Avoid: <code class="language-plaintext highlighter-rouge">IMG_1234.jpg</code> → “Img 1234”</li>
+    </ul>
+  </li>
+  <li><strong>Optimize images</strong> for web (recommended: max 2MB per image)</li>
+  <li><strong>Use hyphens or underscores</strong> in filenames instead of spaces</li>
+  <li>Images are displayed in alphabetical order by filename</li>
+</ul>
+
+<h2 id="examples">Examples:</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>misc/invitation/memories/
+├── 01-family-reunion.jpg      → "01 family reunion"
+├── 02-birthday-party.png      → "02 birthday party"
+├── 03-vacation-beach.jpg      → "03 vacation beach"
+└── graduation-day.jpg         → "Graduation day"
+</code></pre></div></div>
+
+  </div>
+
+</article>
+
+
+    <script>
+        // Carousel functionality for 2x2 grid
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.carousel-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevButton = document.querySelector('.carousel-arrow-left');
+            const nextButton = document.querySelector('.carousel-arrow-right');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            if (!track || slides.length === 0) return;
+
+            let currentIndex = 0;
+
+            slides.forEach((slide) => {
+                const cardCount = slide.querySelectorAll('.project-card').length;
+                if (cardCount > 0 && cardCount < 3) {
+                    slide.classList.add(`cards-${cardCount}`);
+                }
+            });
+
+            function updateCarousel() {
+                const slideWidth = slides[0].offsetWidth;
+                const gap = 30;
+                const offset = currentIndex * (slideWidth + gap);
+                track.style.transform = `translateX(-${offset}px)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+
+                // Update arrow states
+                if (prevButton && nextButton) {
+                    prevButton.disabled = currentIndex === 0;
+                    nextButton.disabled = currentIndex >= slides.length - 1;
+                }
+            }
+
+            function goToSlide(index) {
+                currentIndex = Math.max(0, Math.min(index, slides.length - 1));
+                updateCarousel();
+            }
+
+            function nextSlide() {
+                if (currentIndex < slides.length - 1) {
+                    goToSlide(currentIndex + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                }
+            }
+
+            // Event listeners
+            if (prevButton) prevButton.addEventListener('click', prevSlide);
+            if (nextButton) nextButton.addEventListener('click', nextSlide);
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+            });
+
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    updateCarousel();
+                }, 250);
+            });
+
+            // Initialize
+            updateCarousel();
+        });
+
+        // Touch-friendly contact button toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactExpandable = document.querySelector('.contact-expandable');
+            const contactButton = document.querySelector('.btn-contact-main');
+
+            if (contactExpandable && contactButton) {
+                // Only add click handler for touch devices
+                if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                    contactButton.addEventListener('click', function(e) {
+                        // Only prevent default if it's the mailto link
+                        if (contactExpandable.classList.contains('active')) {
+                            // Let the mailto link work
+                            return;
+                        } else {
+                            // Prevent the link and toggle icons
+                            e.preventDefault();
+                            contactExpandable.classList.toggle('active');
+                        }
+                    });
+
+                    // Close when clicking outside
+                    document.addEventListener('click', function(e) {
+                        if (!contactExpandable.contains(e.target)) {
+                            contactExpandable.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

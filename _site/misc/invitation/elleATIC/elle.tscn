@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bs8xex6kh07ku"]
+
+[ext_resource type="Texture2D" uid="uid://duvhankdr70rm" path="res://icon.svg" id="1_3dk5v"]
+[ext_resource type="Script" uid="uid://c3jgi6pk71pkt" path="res://scripts/elle.gd" id="1_e5qkk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y04xd"]
+radius = 12.0
+
+[node name="Elle" type="CharacterBody2D" unique_id=987597966]
+script = ExtResource("1_e5qkk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=456676127]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3dk5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1973373436]
+shape = SubResource("CircleShape2D_y04xd")
+
+[node name="HazardDetector" type="Area2D" parent="." unique_id=1299630617]
+collision_mask = 7

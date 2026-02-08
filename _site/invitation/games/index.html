@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Limelight&family=Jacquard+24&family=Quintessential&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Theme Colors */
+            --color-primary: #123524;
+            --color-secondary: #00a767;
+            --color-accent: #eefdf4;
+            --color-background: #e8f3f5;
+            --color-white: #ffffff;
+            --color-text-primary: #e8f3f5;
+            --color-text-secondary: #eefdf4;
+            --color-text-muted: #718096;
+            --color-nav-bg: #123524;
+            --color-hover-light: #c8e6d3;
+            --color-hover-dark: #0a1f16;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--color-nav-bg);
+            min-height: 100vh;
+            position: relative;
+            padding-top: 90px;
+            animation: backgroundCycle 30s ease-in-out infinite;
+        }
+
+        @keyframes backgroundCycle {
+            0%, 100% {
+                background: #F0FCF5;
+            }
+            33% {
+                background: #E8F3F5;
+            }
+            66% {
+                background: #9CB0A4;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(18, 53, 36, 0.3);
+            z-index: 1000;
+        }
+
+        nav .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        nav .logo:hover {
+            color: var(--color-hover-light);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--color-hover-dark);
+            background: rgba(18, 53, 36, 0.1);
+        }
+
+        /* Full-Page Hero Banner */
+        .invitation-banner {
+            min-height: calc(100vh - 90px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .invitation-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .invitation-banner p {
+            font-size: 2rem;
+            color: var(--color-primary);
+            font-weight: 400;
+        }
+
+        /* Scroll Down Button */
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--color-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-down-btn .material-symbols-outlined {
+            font-size: 3rem;
+        }
+
+        .scroll-down-btn:hover {
+            transform: translateX(-50%) translateY(5px);
+            color: var(--color-secondary);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Content Area */
+        .invitation-main {
+            min-height: calc(100vh - 300px);
+            padding: 20px 5%;
+        }
+
+        /* Decorative Elements */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            top: 10%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--color-text-secondary) 0%, transparent 70%);
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            top: 60%;
+            right: 15%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            bottom: 20%;
+            left: 20%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(90deg);
+            }
+            50% {
+                transform: translate(-15px, 15px) rotate(180deg);
+            }
+            75% {
+                transform: translate(15px, 20px) rotate(270deg);
+            }
+        }
+
+        /* Settings Dropdown */
+        .settings-dropdown {
+            position: relative;
+        }
+
+        .settings-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            transition: transform 0.3s;
+            color: var(--color-text-primary);
+        }
+
+        .settings-btn:hover {
+            transform: rotate(45deg);
+        }
+
+        .settings-icon {
+            display: block;
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--color-white);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 250px;
+            box-shadow: 0 8px 24px rgba(18, 53, 36, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 1001;
+        }
+
+        .settings-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .settings-item {
+            padding: 0.75rem 0;
+        }
+
+        .settings-item label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .settings-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--color-primary);
+        }
+
+        .settings-item span {
+            user-select: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .invitation-banner h1 {
+                font-size: 3.5rem;
+            }
+
+            .invitation-banner p {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 5%;
+            }
+
+            nav .logo {
+                font-size: 1.3rem;
+            }
+
+            nav .nav-links {
+                gap: 0.5rem;
+                font-size: 0.85rem;
+            }
+
+            nav .nav-links a {
+                padding: 0.4rem 0.6rem;
+            }
+
+            .invitation-banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .invitation-banner p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Decorative Shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Pastel Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/invitation/" class="logo"> Hub</a>
+            <div class="settings-dropdown">
+                <button class="settings-btn" onclick="toggleSettings()">
+                    <span class="material-symbols-outlined settings-icon">settings</span>
+                </button>
+                <div class="settings-menu" id="settingsMenu">
+                    <div class="settings-item">
+                        <label>
+                            <input type="checkbox" id="disablePasswordGame" onchange="saveSettings()">
+                            <span>Disable Password Game</span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <label>
+                            <input type="checkbox" id="disableBackgroundMusic" onchange="saveSettings()">
+                            <span>Disable Background Music</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="invitation-main" id="main-content">
+        <style>
+    :root {
+        /* Theme Colors */
+        --color-primary: #123524;
+        --color-secondary: #00a767;
+        --color-accent: #eefdf4;
+        --color-background: #e8f3f5;
+        --color-white: #ffffff;
+        --color-text-primary: #123524;
+        --color-text-secondary: #4a5568;
+        --color-text-muted: #718096;
+        --color-border-accent: #a8d5ba;
+    }
+
+    .game-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .game-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .game-header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: var(--color-primary);
+        margin-bottom: 1rem;
+    }
+
+    .game-header p {
+        font-size: 1.2rem;
+        color: var(--color-text-secondary);
+    }
+
+    /* Game Wrapper */
+    .game-wrapper {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 200px);
+        min-height: 600px;
+        background: #000;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(18, 53, 36, 0.3);
+    }
+
+    .game-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--color-primary) 0%, #0a1f16 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        transition: opacity 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(238, 253, 244, 0.2);
+        border-top-color: var(--color-accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1.5rem;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+        color: var(--color-accent);
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .loading-hint {
+        color: rgba(238, 253, 244, 0.7);
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+    /* Error State */
+    .error-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #2d1b1b 0%, #1a0f0f 100%);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        padding: 40px;
+        text-align: center;
+    }
+
+    .error-overlay.visible {
+        display: flex;
+    }
+
+    .error-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-text {
+        color: #fed7d7;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .retry-button {
+        background: linear-gradient(135deg, var(--color-secondary) 0%, #00875a 100%);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .retry-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 167, 103, 0.4);
+    }
+
+    /* Controls */
+    .game-controls {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .control-button {
+        background: linear-gradient(135deg, var(--color-primary) 0%, #0a1f16 100%);
+        color: var(--color-accent);
+        border: 2px solid var(--color-border-accent);
+        padding: 10px 24px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .control-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(18, 53, 36, 0.3);
+        background: linear-gradient(135deg, #0a1f16 0%, var(--color-primary) 100%);
+    }
+
+    .control-button svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .game-header h1 {
+            font-size: 2rem;
+        }
+
+        .game-header p {
+            font-size: 1rem;
+        }
+
+        .game-wrapper {
+            height: calc(100vh - 250px);
+            min-height: 400px;
+        }
+
+        .control-button {
+            font-size: 0.9rem;
+            padding: 8px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .game-container {
+            padding: 10px;
+        }
+
+        .game-wrapper {
+            border-radius: 12px;
+        }
+
+        .game-header h1 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="game-container">
+    <div class="game-header">
+        <h1>🎮 elleATIC</h1>
+        <p>Enjoy the game!</p>
+    </div>
+
+    <div class="game-wrapper">
+        <iframe id="gameFrame" src="/misc/invitation/elleATIC/export_test.html" allowfullscreen="" allow="autoplay; fullscreen; gamepad" onload="handleGameLoad()" onerror="handleGameError()">
+        </iframe>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Game...</div>
+            <div class="loading-hint">This may take a moment</div>
+        </div>
+
+        <!-- Error Overlay -->
+        <div id="errorOverlay" class="error-overlay">
+            <div class="error-icon">⚠️</div>
+            <div class="error-text">Unable to load the game. Please try again.</div>
+            <button class="retry-button" onclick="retryLoad()">Retry</button>
+        </div>
+    </div>
+
+    <div class="game-controls">
+        <button class="control-button" onclick="toggleFullscreen()">
+            <svg viewBox="0 0 24 24">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+            </svg>
+            <span id="fullscreenText">Fullscreen</span>
+        </button>
+        <button class="control-button" onclick="reloadGame()">
+            <svg viewBox="0 0 24 24">
+                <path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+            </svg>
+            Reload
+        </button>
+    </div>
+</div>
+
+<script>
+    let loadAttempts = 0;
+    const MAX_ATTEMPTS = 3;
+
+    function handleGameLoad() {
+        setTimeout(() => {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
+        }, 1500);
+    }
+
+    function handleGameError() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorOverlay = document.getElementById('errorOverlay');
+
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+        }
+
+        if (errorOverlay) {
+            errorOverlay.classList.add('visible');
+        }
+    }
+
+    function retryLoad() {
+        if (loadAttempts >= MAX_ATTEMPTS) {
+            alert('Unable to load game after multiple attempts. Please check your internet connection.');
+            return;
+        }
+
+        loadAttempts++;
+
+        const iframe = document.getElementById('gameFrame');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const errorOverlay = document.getElementById('errorOverlay');
+
+        if (errorOverlay) {
+            errorOverlay.classList.remove('visible');
+        }
+
+        if (loadingOverlay) {
+            loadingOverlay.classList.remove('hidden');
+        }
+
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
+    }
+
+    function reloadGame() {
+        const iframe = document.getElementById('gameFrame');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        if (loadingOverlay) {
+            loadingOverlay.classList.remove('hidden');
+        }
+
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
+    }
+
+    function toggleFullscreen() {
+        const wrapper = document.querySelector('.game-wrapper');
+        const fullscreenText = document.getElementById('fullscreenText');
+
+        if (!document.fullscreenElement) {
+            if (wrapper.requestFullscreen) {
+                wrapper.requestFullscreen();
+            } else if (wrapper.webkitRequestFullscreen) {
+                wrapper.webkitRequestFullscreen();
+            } else if (wrapper.msRequestFullscreen) {
+                wrapper.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+    }
+
+    // Update fullscreen button text
+    document.addEventListener('fullscreenchange', function() {
+        const fullscreenText = document.getElementById('fullscreenText');
+        if (fullscreenText) {
+            fullscreenText.textContent = document.fullscreenElement ? 'Exit Fullscreen' : 'Fullscreen';
+        }
+    });
+
+    // Auto-hide loading overlay after timeout
+    setTimeout(() => {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay && !loadingOverlay.classList.contains('hidden')) {
+            loadingOverlay.classList.add('hidden');
+        }
+    }, 10000);
+</script>
+
+
+    </main>
+
+    <script>
+        // Toggle settings dropdown
+        function toggleSettings() {
+            const menu = document.getElementById('settingsMenu');
+            menu.classList.toggle('show');
+        }
+
+        // Close settings menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const settingsDropdown = document.querySelector('.settings-dropdown');
+            const menu = document.getElementById('settingsMenu');
+
+            if (settingsDropdown && !settingsDropdown.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Save settings to localStorage
+        function saveSettings() {
+            const passwordGameDisabled = document.getElementById('disablePasswordGame').checked;
+            const musicDisabled = document.getElementById('disableBackgroundMusic').checked;
+
+            localStorage.setItem('invitation_disablePasswordGame', passwordGameDisabled);
+            localStorage.setItem('invitation_disableBackgroundMusic', musicDisabled);
+
+            console.log('Settings saved:', { passwordGameDisabled, musicDisabled });
+        }
+
+        // Load settings from localStorage
+        function loadSettings() {
+            const passwordGameDisabled = localStorage.getItem('invitation_disablePasswordGame') === 'true';
+            const musicDisabled = localStorage.getItem('invitation_disableBackgroundMusic') === 'true';
+
+            const passwordGameCheckbox = document.getElementById('disablePasswordGame');
+            const musicCheckbox = document.getElementById('disableBackgroundMusic');
+
+            if (passwordGameCheckbox) passwordGameCheckbox.checked = passwordGameDisabled;
+            if (musicCheckbox) musicCheckbox.checked = musicDisabled;
+        }
+
+        // Load settings on page load
+        window.addEventListener('DOMContentLoaded', loadSettings);
+    </script>
+
+</body>
+</html>
