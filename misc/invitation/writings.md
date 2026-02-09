@@ -353,7 +353,7 @@ permalink: /invitation/writings/
             Thinking.
             My coffee, sipping
             It's too hot, fucking.
-            Probably burnt my tongue.`
+            Probably burnt my tongue..`
         },
         {
             id: 4,
