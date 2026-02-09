@@ -254,40 +254,19 @@ permalink: /invitation/hub/
     </div> -->
 
     <div class="hub-grid">
-        <a href="/invitation/music/" class="hub-block">
-            <div class="block-icon"><span class="material-symbols-outlined">music_note</span></div>
-            <h3>Music</h3>
-            <p>My favorite tunes</p>
+        <a href="/invitation/games/" class="hub-block">
+            <div class="block-icon"><span class="material-symbols-outlined">stadia_controller</span></div>
+            <h3>Elle and the Ice Caves</h3>
         </a>
 
         <a href="/invitation/memories/" class="hub-block">
             <div class="block-icon"><span class="material-symbols-outlined">photo_camera</span></div>
-            <h3>Memories</h3>
-            <p>Cherished moments</p>
+            <h3>Lord Uggs Paintings</h3>
         </a>
 
         <a href="/invitation/writings/" class="hub-block">
             <div class="block-icon"><span class="material-symbols-outlined">edit_note</span></div>
-            <h3>Writings</h3>
-            <p>Thoughts & stories</p>
-        </a>
-
-        <a href="/invitation/notes/" class="hub-block">
-            <div class="block-icon"><span class="material-symbols-outlined">sticky_note_2</span></div>
-            <h3>Notes</h3>
-            <p>Quick thoughts</p>
-        </a>
-
-        <a href="/invitation/games/" class="hub-block">
-            <div class="block-icon"><span class="material-symbols-outlined">stadia_controller</span></div>
-            <h3>Games</h3>
-            <p>Interactive fun</p>
-        </a>
-
-        <a href="/invitation/productivity/" class="hub-block">
-            <div class="block-icon"><span class="material-symbols-outlined">eco</span></div>
-            <h3>Productivity</h3>
-            <p>Grow with focus</p>
+            <h3>Nosferatu's Musings</h3>
         </a>
     </div>
 </div>

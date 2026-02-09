@@ -217,7 +217,7 @@ permalink: /invitation/memories/
 </style>
 
 <div class="section-view">
-    <h1><span class="material-symbols-outlined">photo_camera</span> Memories</h1>
+    <h1><span class="material-symbols-outlined">photo_camera</span> Lord Ugg's Paintings</h1>
     <p class="section-description">A collection of cherished moments</p>
 
     <div class="photo-gallery" id="photoGallery">

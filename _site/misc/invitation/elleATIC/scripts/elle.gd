@@ -1,11 +1,15 @@
 extends CharacterBody2D
 
-
-const SPEED = 300.0
+const SPEED = 250.0
 const JUMP_VELOCITY = -400.0
+const CLIMB_SPEED = 200.0
 const SHODDY_TILE_TIMER = 1
-var health = 3
+var health = 5
+
+
 @onready var hazard_detector = $HazardDetector
+# Add this line - adjust path based on your scene structure
+@onready var health_ui = get_node("../CanvasLayer/HBoxContainer")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -16,26 +20,63 @@ var active_shoddy_tiles = {}
 # Track last hazard tile touched
 var last_hazard_tile = null
 
+# Ladder climbing
+var is_on_ladder = false
+var ladder_tilemap = null
+
+# Interaction detection
+var nearby_npc = null
+
 func _ready():
 	collision_layer = 1
-	collision_mask = 7
+	collision_mask = 7  # Collides with layers 1, 2, 3 (not 4 for ladders)
+	# Make sure player is in "player" group
+	add_to_group("player")
+	# Initialize health display
+	if health_ui:
+		health_ui.update_hearts(health)
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction = Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+	# Check if player is overlapping a ladder tile
+	check_ladder_overlap()
+	
+	# Ladder climbing logic
+	if is_on_ladder:
+		var vertical_input = Input.get_axis("ui_up", "ui_down")
+		if vertical_input != 0:
+			# Climbing - no gravity
+			velocity.y = vertical_input * CLIMB_SPEED
+		else:
+			# Holding on ladder - no movement
+			velocity.y = 0
+		
+		# Can still move left/right on ladder
+		var direction = Input.get_axis("ui_left", "ui_right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+		# Can jump off ladder
+		if Input.is_action_just_pressed("ui_accept"):
+			is_on_ladder = false
+			velocity.y = JUMP_VELOCITY
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# Normal platformer physics
+		# Add the gravity
+		if not is_on_floor():
+			velocity.y += gravity * delta
+
+		# Handle jump
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+
+		# Get the input direction and handle the movement/deceleration
+		var direction = Input.get_axis("ui_left", "ui_right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 	
@@ -57,7 +98,6 @@ func _physics_process(delta):
 			
 			if tile_data:
 				var tile_type = tile_data.get_custom_data("tile_type")
-				print(tile_type)
 				match tile_type:
 					"terrain":
 						pass
@@ -75,9 +115,48 @@ func _physics_process(delta):
 	if not touching_hazard:
 		last_hazard_tile = null
 
+func _input(event):
+	# Handle NPC interaction with 'E' key
+	if event.is_action_pressed("interact") and nearby_npc != null:
+		nearby_npc.trigger_interaction()
+		print("Player pressed E near NPC!")
+
+func check_ladder_overlap():
+	# Get the tilemap
+	var tilemap = get_node("../TileMap")  # Adjust path as needed
+	
+	# Get player's current tile position
+	var player_tile_pos = tilemap.local_to_map(tilemap.to_local(global_position))
+	var tile_data = tilemap.get_cell_tile_data(0, player_tile_pos)
+	
+	if tile_data:
+		var tile_type = tile_data.get_custom_data("tile_type")
+		if tile_type == "ladder":
+			is_on_ladder = true
+			ladder_tilemap = tilemap
+			return
+	
+	# Not on ladder
+	is_on_ladder = false
+	ladder_tilemap = null
+
+func set_nearby_npc(npc):
+	"""Called by NPC when player enters interaction range"""
+	nearby_npc = npc
+	print("NPC nearby: ", npc)
+
+func clear_nearby_npc(npc):
+	"""Called by NPC when player exits interaction range"""
+	if nearby_npc == npc:
+		nearby_npc = null
+		print("NPC left range")
+
 func take_damage():
-	health -=1
-	print("Ouch! Health: health")
+	health -= 1
+	print("Ouch! Health: ", health)
+	# Update UI
+	if health_ui:
+		health_ui.update_hearts(health)
 	if health <= 0:
 		die()
 
@@ -104,7 +183,6 @@ func _process(delta):
 			
 			tilemap.erase_cell(0, pos)
 			tiles_to_remove.append(tile_key)
-			print("Shoddy tile disappeared at ", pos)
 	
 	# Clean up finished timers
 	for tile_key in tiles_to_remove:
@@ -121,7 +199,6 @@ func start_shoddy_timer(tilemap: TileMap, tile_pos: Vector2i):
 			"time_left": SHODDY_TILE_TIMER,
 			"warning_shown": false
 		}
-		print("Shoddy tile activated at ", tile_pos)
 		# Also spawn particles
 		spawn_particles(tilemap, tile_pos)
 
@@ -163,7 +240,6 @@ func spawn_falling_tile(tilemap: TileMap, tile_pos: Vector2i):
 	
 	# Delete sprite after animation
 	tween.chain().tween_callback(falling_sprite.queue_free)
-
 
 func spawn_particles(tilemap: TileMap, tile_pos: Vector2i):
 	# Create simple particle effect

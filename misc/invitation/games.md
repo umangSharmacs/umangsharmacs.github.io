@@ -233,7 +233,7 @@ permalink: /invitation/games/
 
 <div class="game-container">
     <div class="game-header">
-        <h1>🎮 elleATIC</h1>
+        <h1>Elle and the Ice Caves</h1>
         <p>Enjoy the game!</p>
     </div>
 
